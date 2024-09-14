@@ -6,7 +6,7 @@
 #    By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 16:16:17 by yufonten          #+#    #+#              #
-#    Updated: 2024/09/14 11:17:28 by yufonten         ###   ########.fr        #
+#    Updated: 2024/09/14 13:00:39 by yufonten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,15 @@ SRCS =	ft_isalpha.c\
 	ft_putendl_fd.c\
 	ft_putnbr_fd.c\
 	get_next_line.c\
-	get_next_line_utils.c
+	get_next_line_utils.c\
+	ft_fprint_unsint.c\
+	ft_fprintchar.c\
+	ft_fprintf.c\
+	ft_fprinthex.c\
+	ft_fprintnbr.c\
+	ft_fprintptr.c\
+	ft_fprintstr.c
+
 
 OBJS = $(SRCS:.c=.o)
 

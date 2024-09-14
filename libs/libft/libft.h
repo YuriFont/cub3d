@@ -6,7 +6,7 @@
 /*   By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:48:01 by yufonten          #+#    #+#             */
-/*   Updated: 2024/09/14 11:15:24 by yufonten         ###   ########.fr       */
+/*   Updated: 2024/09/14 12:51:57 by yufonten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -25,6 +26,20 @@ typedef struct s_list
 	char			*buf;
 	struct s_list	*next;
 }	t_list;
+
+int		ft_printchar(int fd, char c);
+
+int		ft_printstr(int fd, const char *s);
+
+int		ft_printnbr(int fd, int nb);
+
+int		ft_printptr(int fd, unsigned long long ptr);
+
+int		ft_print_unsint(int fd, unsigned int n);
+
+int		ft_printhex(int fd, unsigned int n, const char c);
+
+int		ft_fprintf(int fd, const char *s, ...);
 
 int		found_newline(t_list *list);
 
