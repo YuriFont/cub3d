@@ -16,7 +16,7 @@ fi
 
 ./cub3D test 2> stderr_output
 
-if [ $? -ne 0 ]; then
+if [ $? -ne 1 ]; then
     echo "Error in test 03: ./cubeD test"
     exit 1
 fi
