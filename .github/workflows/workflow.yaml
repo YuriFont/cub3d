@@ -1,0 +1,17 @@
+name: Continuos Integration
+
+on: [pull_request, push]
+
+jobs:
+  contiuos integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: build and test
+        run: |
+          make
+          ./cub3D
+          ./cub3D test1 test2
+          ./cub3D dasd
+          ./cub3D .cub
