@@ -2,8 +2,11 @@ NAME = cub3D
 
 ERROR = error.c
 
+VALIDATION = validation.c
+
 FILES = main.c\
-		$(addprefix error/, $(ERROR))
+		$(addprefix error/, $(ERROR))\
+		$(addprefix validation/, $(VALIDATION))
 
 LIBFT = ./libs/libft/
 

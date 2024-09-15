@@ -20,6 +20,10 @@
 
 //error
 //error.c
-int	error(char *msg);
+int	    error(char *msg);
+
+//validation
+//validation.c
+void	validation(char *file);
 
 #endif

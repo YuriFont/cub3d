@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 12:13:32 by yufonten          #+#    #+#             */
-/*   Updated: 2024/09/14 12:13:32 by yufonten         ###   ########.fr       */
+/*   Created: 2024/09/15 10:35:01 by yufonten          #+#    #+#             */
+/*   Updated: 2024/09/15 10:35:01 by yufonten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
-int	main(int ac, char **av)
+static void	validate_extension(char *file)
 {
-	if (ac != 2)
-		error("Error: cub3D only accepts one parameter");
-	validation(av[1]);
+	int	i;
+
+	i = ft_strlen(file);
+	if (i < 5 || file[i - 1] != 'b' || file[i - 2] != 'u'
+		|| file[i - 3] != 'c' || file[i - 4] != '.')
+		error("Error: the file must have a .cub extension.");
+}
+
+void	validation(char *file)
+{
+	validate_extension(file);
 }
