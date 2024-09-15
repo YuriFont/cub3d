@@ -3,7 +3,7 @@ name: Continuos Integration
 on: [pull_request, push]
 
 jobs:
-  contiuos integration:
+  contiuos_integration:
     runs-on: ubuntu-latest
 
     steps:
