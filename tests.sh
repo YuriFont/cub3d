@@ -1,0 +1,31 @@
+#!/bin/bash
+
+./cub3D 2> stderr_output
+
+if [ $? -ne 1 ]; then
+    echo "Error in test 01: ./cub3D"
+    exit 1
+fi
+
+./cub3D test test 2> stderr_output
+
+if [ $? -ne 1 ]; then
+    echo "Error in test 02: ./cubeD test test"
+    exit 1
+fi
+
+./cub3D test 2> stderr_output
+
+if [ $? -ne 1 ]; then
+    echo "Error in test 03: ./cubeD test"
+    exit 1
+fi
+
+./cub3D .cub 2> stderr_output
+
+if [ $? -ne 1 ]; then
+    echo "Error in test 04: ./cubeD .cub"
+    exit 1
+fi
+
+rm stderr_output

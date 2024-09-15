@@ -18,8 +18,5 @@ jobs:
           sudo apt install clang
       - name: build and test
         run: |
-          make
-          ./cub3D
-          ./cub3D test1 test2
-          ./cub3D dasd
-          ./cub3D .cub
+          make re
+          ./tests.sh
