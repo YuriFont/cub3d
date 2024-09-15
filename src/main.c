@@ -17,4 +17,5 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		error("Error: cub3D only accepts one parameter");
 	validation(av[1]);
+	
 }
