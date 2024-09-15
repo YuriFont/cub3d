@@ -8,6 +8,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: update libs
+        run: |
+          apt-get update
+          apt-get upgrade
+          apt install libx11-dev
+          apt install libxext-dev
+          apt install libbsd-dev
+          apt install clang
       - name: build and test
         run: |
           make
