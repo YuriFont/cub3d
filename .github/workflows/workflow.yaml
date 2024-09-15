@@ -10,12 +10,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: update libs
         run: |
-          apt-get update
-          apt-get upgrade
-          apt install libx11-dev
-          apt install libxext-dev
-          apt install libbsd-dev
-          apt install clang
+          sudo apt-get update
+          sudo apt-get upgrade
+          sudo apt install libx11-dev
+          sudo apt install libxext-dev
+          sudo apt install libbsd-dev
+          sudo apt install clang
       - name: build and test
         run: |
           make
