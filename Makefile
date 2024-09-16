@@ -2,11 +2,11 @@ NAME = cub3D
 
 ERROR = error.c
 
-VALIDATION = validation.c
+FILL_STRUCT = fill_struct.c
 
 FILES = main.c\
 		$(addprefix error/, $(ERROR))\
-		$(addprefix validation/, $(VALIDATION))
+		$(addprefix fill_struct/, $(FILL_STRUCT))
 
 LIBFT = ./libs/libft/
 

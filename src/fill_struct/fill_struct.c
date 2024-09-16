@@ -22,14 +22,34 @@ static void	validate_extension(char *file)
 		error("Error: the file must have a .cub extension\n");
 }
 
-/*static void	validate_textures(char *file)
+static void	fill_textures(t_cub *cub)
 {
+	int		i;
+	char	*line;
 
-}*/
+	i = 0;
+	while (i < 4)
+	{
+		line = get_next_line(cub->fd_cub);
+		cub->tex.no = ft_substr(line, 3, ft_strlen(line) - 4);
+		if (ft_strncmp(line, "NO", 2) || (open(cub->tex.no, O_RDONLY) == -1))
+			
+		if (ft_strncmp(line, "SO", 2)
+			|| open(ft_substr(line, 3, ft_strlen(line) - 5), O_RDONLY) == -1)
+			error("Error: could not open file to the south textures\n", cub);
+		if (ft_strncmp(line, "WE", 2)
+			|| open(ft_substr(line, 3, ft_strlen(line) - 5), O_RDONLY) == -1)
+			error("Error: could not open file to the west textures\n", cub);
+		if (ft_strncmp(line, "EA", 2)
+			|| open(ft_substr(line, 3, ft_strlen(line) - 5), O_RDONLY) == -1)
+			error("Error: could not open file to the east textures\n", cub);
+	}
+}
 
-void	validation(t_cub *cub, char *file)
+void	fill_struct(t_cub *cub, char *file)
 {
 	validate_extension(file);
 	if ((cub->fd_cub = open(file, O_RDONLY)) == -1)
 		error("Error: could not open the file\n");
+	fill_textures(cub);
 }

@@ -19,17 +19,26 @@
 # include <fcntl.h>
 # include "../libs/libft/libft.h"
 
+typedef	struct s_tex
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+}	t_tex;
+
 typedef struct s_cub
 {
-	int	fd_cub;
+	int		fd_cub;
+	t_tex	tex;
 }	t_cub;
 
 //error
 //error.c
 int	    error(char *msg);
 
-//validation
-//validation.c
-void	validation(t_cub *cub, char *file);
+//fill_struct
+//fill_struct.c
+void	fill_struct(t_cub *cub, char *file);
 
 #endif

@@ -12,8 +12,15 @@
 
 #include "../../inc/cub3d.h"
 
-int	error(char *msg)
+/*static void	free_struct(t_cub *cub)
 {
+	
+}*/
+
+int	error(char *msg, t_cub *cub)
+{
+	if (cub)
+		free_struct(cub);
 	ft_fprintf(2, "%s", msg);
 	exit(1);
 }
