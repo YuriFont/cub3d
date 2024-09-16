@@ -14,6 +14,6 @@
 
 int	error(char *msg)
 {
-	ft_fprintf(2, "%s\n", msg);
+	ft_fprintf(2, "%s", msg);
 	exit(1);
 }

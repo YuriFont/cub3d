@@ -14,8 +14,10 @@
 
 int	main(int ac, char **av)
 {
+	t_cub	cub;
+
 	if (ac != 2)
-		error("Error: cub3D only accepts one parameter");
-	validation(av[1]);
+		error("Error: cub3D only accepts one parameter\n");
+	validation(&cub, av[1]);
 	
 }

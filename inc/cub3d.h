@@ -16,7 +16,13 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../libs/libft/libft.h"
+
+typedef struct s_cub
+{
+	int	fd_cub;
+}	t_cub;
 
 //error
 //error.c
@@ -24,6 +30,6 @@ int	    error(char *msg);
 
 //validation
 //validation.c
-void	validation(char *file);
+void	validation(t_cub *cub, char *file);
 
 #endif
