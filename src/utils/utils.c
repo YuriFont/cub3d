@@ -18,4 +18,6 @@ void	free_cub(t_cub *cub)
 	free(cub->tex.so);
 	free(cub->tex.we);
 	free(cub->tex.ea);
+	free(cub->tex.cf);
+	free(cub->tex.cc);
 }

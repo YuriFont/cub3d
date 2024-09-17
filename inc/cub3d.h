@@ -25,6 +25,8 @@ typedef	struct s_tex
 	char	*so;
 	char	*we;
 	char	*ea;
+	char	*cf;
+	char	*cc;
 }	t_tex;
 
 typedef struct s_cub

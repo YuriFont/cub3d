@@ -50,9 +50,28 @@ static void	fill_textures(t_cub *cub)
 	free(line);
 }
 
+static void	fill_colors(t_cub *cub)
+{
+	char	*line;
+
+	line = get_next_line(cub->fd_cub);
+	free(line);
+	line = get_next_line(cub->fd_cub);
+	cub->tex.cf = ft_substr(line, 2, ft_strlen(line) - 3);
+	if (ft_strncmp(line, "F", 1))
+		error("Error: misconfiguration in floor color\n", cub);
+	free(line);
+	line = get_next_line(cub->fd_cub);
+	cub->tex.cc = ft_substr(line, 2, ft_strlen(line) - 3);
+	if (ft_strncmp(line, "C", 1))
+		error("Error: misconfiguration in ceiling color\n", cub);
+	free(line);
+}
+
 void	fill_struct(t_cub *cub, char *file)
 {
 	validate_extension(cub, file);
 	fill_textures(cub);
+	fill_colors(cub);
 	close(cub->fd_cub);
 }
