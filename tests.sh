@@ -44,14 +44,11 @@ if [ $cr_cub -ne 1 ] || [ $cr_grep -ne 0 ]; then
     exit 1
 fi
 
-./cub3D ../maps/default.cub 2> stderr_output
+./cub3D ./maps/default.cub 2> stderr_output
 cr_cub=$?
 
-grep -q "Error: could not open the file" stderr_output
-cr_grep=$?
-
-if [ $cr_cub -ne 1 ] || [ $cr_grep -ne 0 ]; then
-    echo "Error in test 05: ./cub3D ../maps/default.cub"
+if [ $cr_cub -ne 0 ] || [ $cr_grep -ne 0 ]; then
+    echo "Error in test 05: ./cub3D ./maps/default.cub"
     exit 1
 fi
 
