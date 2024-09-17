@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 12:33:46 by yufonten          #+#    #+#             */
-/*   Updated: 2024/09/14 12:33:46 by yufonten         ###   ########.fr       */
+/*   Created: 2024/09/16 22:01:01 by yufonten          #+#    #+#             */
+/*   Updated: 2024/09/16 22:01:01 by yufonten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-int	error(char *msg, t_cub *cub)
+void	free_cub(t_cub *cub)
 {
-	if (cub)
-		free_cub(cub);
-	ft_fprintf(2, "%s", msg);
-	exit(1);
+	free(cub->tex.no);
+	free(cub->tex.so);
+	free(cub->tex.we);
+	free(cub->tex.ea);
 }

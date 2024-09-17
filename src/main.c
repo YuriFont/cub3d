@@ -17,7 +17,8 @@ int	main(int ac, char **av)
 	t_cub	cub;
 
 	if (ac != 2)
-		error("Error: cub3D only accepts one parameter\n");
+		error("Error: cub3D only accepts one parameter\n", NULL);
 	fill_struct(&cub, av[1]);
+	free_cub(&cub);
 	return (0);
 }

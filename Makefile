@@ -4,9 +4,12 @@ ERROR = error.c
 
 FILL_STRUCT = fill_struct.c
 
+UTILS = utils.c
+
 FILES = main.c\
 		$(addprefix error/, $(ERROR))\
-		$(addprefix fill_struct/, $(FILL_STRUCT))
+		$(addprefix fill_struct/, $(FILL_STRUCT))\
+		$(addprefix utils/, $(UTILS))
 
 LIBFT = ./libs/libft/
 

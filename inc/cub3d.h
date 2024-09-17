@@ -35,10 +35,14 @@ typedef struct s_cub
 
 //error
 //error.c
-int	    error(char *msg);
+int	    error(char *msg, t_cub *cub);
 
 //fill_struct
 //fill_struct.c
 void	fill_struct(t_cub *cub, char *file);
+
+//utils
+//utils.c
+void	free_cub(t_cub *cub);
 
 #endif
