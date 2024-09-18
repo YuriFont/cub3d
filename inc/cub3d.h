@@ -33,6 +33,7 @@ typedef struct s_cub
 {
 	int		fd_cub;
 	t_tex	tex;
+	char	**map;
 }	t_cub;
 
 //error

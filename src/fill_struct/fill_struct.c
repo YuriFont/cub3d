@@ -68,10 +68,39 @@ static void	fill_colors(t_cub *cub)
 	free(line);
 }
 
+static	void	fill_map(t_cub *cub)
+{
+	char	*line;
+	char	*holder_map;
+	char	*holder;
+	char	**map;
+
+	holder_map = ft_strdup("");
+	while (1)
+	{
+		line = get_next_line(cub->fd_cub);
+		if (!line)
+		{
+			holder = holder_map;
+			holder_map = ft_strjoin(holder, "\ne");
+			free(holder);
+			break ;
+		}
+		holder = holder_map;
+		holder_map = ft_strjoin(holder, line);
+		free(line);
+		free(holder);
+	}
+	free(line);
+	cub->map = ft_split(holder_map, '\n');
+	free(holder_map);
+}
+
 void	fill_struct(t_cub *cub, char *file)
 {
 	validate_extension(cub, file);
 	fill_textures(cub);
 	fill_colors(cub);
+	fill_map(cub);
 	close(cub->fd_cub);
 }

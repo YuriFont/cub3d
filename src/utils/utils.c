@@ -14,10 +14,16 @@
 
 void	free_cub(t_cub *cub)
 {
+	int	i;
+
+	i = 0;
 	free(cub->tex.no);
 	free(cub->tex.so);
 	free(cub->tex.we);
 	free(cub->tex.ea);
 	free(cub->tex.cf);
 	free(cub->tex.cc);
+	while (cub->map[i][0] != 'e')
+		free(cub->map[i++]);
+	free(cub->map[i]);
 }
