@@ -12,18 +12,27 @@
 
 #include "../../inc/cub3d.h"
 
-void	free_cub(t_cub *cub)
+void	free_cub(t_cub *cub, int flag)
 {
 	int	i;
 
-	i = 0;
-	free(cub->tex.no);
-	free(cub->tex.so);
-	free(cub->tex.we);
-	free(cub->tex.ea);
-	free(cub->tex.cf);
-	free(cub->tex.cc);
-	while (cub->map[i][0] != 'e')
-		free(cub->map[i++]);
-	free(cub->map[i]);
+	if (flag >= 1)
+	{
+		free(cub->tex.no);
+		free(cub->tex.so);
+		free(cub->tex.we);
+		free(cub->tex.ea);
+	}
+	if (flag >= 2)
+	{
+		free(cub->tex.cf);
+		free(cub->tex.cc);
+	}
+	if (flag >= 3)
+	{
+		i = 0;
+		while (cub->map[i] != 0)
+			free(cub->map[i++]);
+		free(cub->map);
+	}
 }

@@ -12,10 +12,10 @@
 
 #include "../../inc/cub3d.h"
 
-int	error(char *msg, t_cub *cub)
+int	error(char *msg, t_cub *cub, int flag)
 {
-	if (cub)
-		free_cub(cub);
+	if (flag)
+		free_cub(cub, flag);
 	ft_fprintf(2, "%s", msg);
 	exit(1);
 }
