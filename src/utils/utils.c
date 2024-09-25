@@ -36,3 +36,11 @@ void	free_cub(t_cub *cub, int flag)
 		free(cub->map);
 	}
 }
+
+int	error(char *msg, t_cub *cub, int flag)
+{
+	if (flag)
+		free_cub(cub, flag);
+	ft_fprintf(2, "%s", msg);
+	exit(1);
+}

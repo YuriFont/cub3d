@@ -1,15 +1,15 @@
 NAME = cub3D
 
-ERROR = error.c
+VALIDATION = validate_map.c
 
 FILL_STRUCT = fill_struct.c
 
 UTILS = utils.c
 
 FILES = main.c\
-		$(addprefix error/, $(ERROR))\
 		$(addprefix fill_struct/, $(FILL_STRUCT))\
-		$(addprefix utils/, $(UTILS))
+		$(addprefix utils/, $(UTILS))\
+		$(addprefix validation/, $(VALIDATION))
 
 LIBFT = ./libs/libft/
 

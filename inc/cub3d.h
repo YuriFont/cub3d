@@ -36,10 +36,6 @@ typedef struct s_cub
 	char	**map;
 }	t_cub;
 
-//error
-//error.c
-int	    error(char *msg, t_cub *cub, int flag);
-
 //fill_struct
 //fill_struct.c
 void	fill_struct(t_cub *cub, char *file);
@@ -47,5 +43,10 @@ void	fill_struct(t_cub *cub, char *file);
 //utils
 //utils.c
 void	free_cub(t_cub *cub, int flag);
+int	    error(char *msg, t_cub *cub, int flag);
+
+//validation
+//validation_map.c
+void	validate_map(t_cub *cub);
 
 #endif
