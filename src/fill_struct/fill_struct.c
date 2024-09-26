@@ -83,7 +83,7 @@ static	void	fill_map(t_cub *cub)
 		free(holder);
 	}
 	free(line);
-	cub->map = ft_split(holder_map, '\n');
+	cub->info_map.map = ft_split(holder_map, '\n');
 	free(holder_map);
 }
 

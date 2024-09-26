@@ -1,0 +1,13 @@
+NO ./assets/42_NO.xpm
+SO ./assets/42_SO.xpm
+WE ./assets/42_WE.xpm
+EA ./assets/42_EA.xpm
+
+F 220,100,0
+C 225,30,0
+
+11111111
+10000001
+1000N001
+10001001
+11111111

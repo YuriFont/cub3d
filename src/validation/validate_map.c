@@ -12,36 +12,34 @@
 
 #include "../../inc/cub3d.h"
 
-static void check_character(char c, int *position, t_cub *cub)
+static int check_character(char c)
 {
-	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
-		error("Error: invalid character in map\n", cub, 3);
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		*position = *position + 1;
-}
-
-static int	is_space(char c)
-{
-	if (c == ' ')
+	if (c != '0' && c != '1' && c != 'N' && c != 'S'
+		&& c != 'E' && c != 'W' && c != ' ')
 		return (1);
 	return (0);
 }
 
-void	count_assets(t_cub *cub)
+static void	validate_chars(t_cub *cub)
 {
 	int	i;
 	int	j;
 	int	position;
+	char	**map;
 
 	i = 0;
 	position = 0;
-	while (cub->map[i])
+	map = cub->info_map.map;
+	while (map[i])
 	{
 		j = 0;
-		while (cub->map[i][j])
+		while (map[i][j])
 		{
-			if (!is_space(cub->map[i][j]))
-				check_character(cub->map[i][j], &position, cub);
+			if (check_character(map[i][j]))
+				error("Error: invalid character in map\n", cub, 3);
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+				position++;
 			j++;
 		}
 		i++;
@@ -50,7 +48,56 @@ void	count_assets(t_cub *cub)
 		error("Error: invalid quantity of player start position\n", cub, 3);
 }
 
+static void	validate_sides(t_cub *cub)
+{
+	char	**map;
+	int		i;
+	int		j;
+	int		k;
+
+	map = cub->info_map.map;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] == ' ')
+			j++;
+		k = ft_strlen(map[i]) - 1;
+		if (map[i][j] != '1' || map[i][k] != '1')
+			error("Error: the map is not surrounded by walls\n", cub, 3);
+		i++;
+	}
+}
+
+static void	validate_top(t_cub *cub)
+{
+	char	**map;
+	int		i;
+	int		j;
+
+	map = cub->info_map.map;
+	j = 0;
+	i = 0;
+	while (map[i][j])
+	{
+		i = 0;
+		while (map[i][j] == ' ')
+			i++;
+		if (map[i][j] != '\0' && map[i][j] != '1')
+			error("Error: the map is not surrounded by walls\n", cub, 3);
+		j++;
+	}
+}
+
 void	validate_map(t_cub *cub)
 {
-	count_assets(cub);
+	int	i;
+
+	i = 0;
+	while (cub->info_map.map[i])
+		i++;
+	cub->info_map.height = i - 1;
+	validate_chars(cub);
+	validate_sides(cub);
+	validate_top(cub);
 }

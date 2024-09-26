@@ -29,10 +29,17 @@ typedef	struct s_tex
 	char	*cc;
 }	t_tex;
 
+typedef	struct s_map
+{
+	char	**map;
+	int		height;
+}	t_map;
+
 typedef struct s_cub
 {
 	int		fd_cub;
 	t_tex	tex;
+	t_map	info_map;
 	char	**map;
 }	t_cub;
 
@@ -46,7 +53,12 @@ void	free_cub(t_cub *cub, int flag);
 int	    error(char *msg, t_cub *cub, int flag);
 
 //validation
-//validation_map.c
+//validate_map.c
 void	validate_map(t_cub *cub);
+//validate_utils.c
+int		check_below(t_cub *cub, int y, int x);
+int		check_above(char **map, int y, int x);
+int		check_left(char **map, int y, int x);
+int		check_right(char **map, int y, int x);
 
 #endif

@@ -31,9 +31,9 @@ void	free_cub(t_cub *cub, int flag)
 	if (flag >= 3)
 	{
 		i = 0;
-		while (cub->map[i] != 0)
-			free(cub->map[i++]);
-		free(cub->map);
+		while (cub->info_map.map[i] != 0)
+			free(cub->info_map.map[i++]);
+		free(cub->info_map.map);
 	}
 }
 
@@ -43,4 +43,9 @@ int	error(char *msg, t_cub *cub, int flag)
 		free_cub(cub, flag);
 	ft_fprintf(2, "%s", msg);
 	exit(1);
+}
+
+int	height_column(char **map, int x)
+{
+
 }
