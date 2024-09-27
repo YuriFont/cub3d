@@ -1,6 +1,8 @@
 NAME = cub3D
 
-VALIDATION = validate_map.c
+VALIDATION = validate_map.c\
+				validate_map_utils.c\
+				check_around.c
 
 FILL_STRUCT = fill_struct.c
 

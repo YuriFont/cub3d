@@ -44,8 +44,3 @@ int	error(char *msg, t_cub *cub, int flag)
 	ft_fprintf(2, "%s", msg);
 	exit(1);
 }
-
-int	height_column(char **map, int x)
-{
-
-}

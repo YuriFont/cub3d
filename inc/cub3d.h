@@ -55,10 +55,10 @@ int	    error(char *msg, t_cub *cub, int flag);
 //validation
 //validate_map.c
 void	validate_map(t_cub *cub);
-//validate_utils.c
-int		check_below(t_cub *cub, int y, int x);
-int		check_above(char **map, int y, int x);
-int		check_left(char **map, int y, int x);
-int		check_right(char **map, int y, int x);
+//validate_map_utils.c
+int		check_character(char c);
+void	validate_spaces(t_cub *cub);
+//check_around.c
+int		check_around(char **map, int y, int x, int h);
 
 #endif

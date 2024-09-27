@@ -12,14 +12,6 @@
 
 #include "../../inc/cub3d.h"
 
-static int check_character(char c)
-{
-	if (c != '0' && c != '1' && c != 'N' && c != 'S'
-		&& c != 'E' && c != 'W' && c != ' ')
-		return (1);
-	return (0);
-}
-
 static void	validate_chars(t_cub *cub)
 {
 	int	i;
@@ -83,7 +75,27 @@ static void	validate_top(t_cub *cub)
 		i = 0;
 		while (map[i][j] == ' ')
 			i++;
-		if (map[i][j] != '\0' && map[i][j] != '1')
+		if (map[i][j] != '1')
+			error("Error: the map is not surrounded by walls\n", cub, 3);
+		j++;
+	}
+}
+
+static void	validate_bottom(t_cub *cub)
+{
+	int		i;
+	int		j;
+	char	**map;
+
+	map = cub->info_map.map;
+	j = 0;
+	i = cub->info_map.height;
+	while (map[i][j])
+	{
+		i = cub->info_map.height;
+		while (map[i][j] == ' ')
+			i--;
+		if (map[i][j] != '1')
 			error("Error: the map is not surrounded by walls\n", cub, 3);
 		j++;
 	}
@@ -99,5 +111,7 @@ void	validate_map(t_cub *cub)
 	cub->info_map.height = i - 1;
 	validate_chars(cub);
 	validate_sides(cub);
+	validate_spaces(cub);
 	validate_top(cub);
+	validate_bottom(cub);
 }
