@@ -114,4 +114,6 @@ void	validate_map(t_cub *cub)
 	validate_spaces(cub);
 	validate_top(cub);
 	validate_bottom(cub);
+	validate_unevenness_top(cub);
+	validate_unevenness_bot(cub);
 }

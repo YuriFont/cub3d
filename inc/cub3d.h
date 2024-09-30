@@ -58,6 +58,8 @@ void	validate_map(t_cub *cub);
 //validate_map_utils.c
 int		check_character(char c);
 void	validate_spaces(t_cub *cub);
+void	validate_unevenness_bot(t_cub *cub);
+void	validate_unevenness_top(t_cub *cub);
 //check_around.c
 int		check_around(char **map, int y, int x, int h);
 
