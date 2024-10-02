@@ -20,8 +20,6 @@ int	main(int ac, char **av)
 		error("Error: cub3D only accepts one parameter\n", NULL, 0);
 	fill_struct(&cub, av[1]);
 	validate_map(&cub);
-	for (int i = 0; cub.info_map.map[i] != 0; i++)
-		printf("%s\n", cub.info_map.map[i]);
 	free_cub(&cub, 3);
 	return (0);
 }

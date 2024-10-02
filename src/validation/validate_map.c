@@ -14,9 +14,9 @@
 
 static void	validate_chars(t_cub *cub)
 {
-	int	i;
-	int	j;
-	int	position;
+	int		i;
+	int		j;
+	int		position;
 	char	**map;
 
 	i = 0;
