@@ -47,6 +47,8 @@ fi
 ./cub3D ./maps/default.cub 2> stderr_output
 cr_cub=$?
 
+cr_grep=$?
+
 if [ $cr_cub -ne 0 ] || [ $cr_grep -ne 0 ]; then
     echo "Error in test 05: ./cub3D ./maps/default.cub"
     exit 1
