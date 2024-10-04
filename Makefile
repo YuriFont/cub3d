@@ -8,10 +8,13 @@ FILL_STRUCT = fill_struct.c
 
 UTILS = utils.c
 
+INIT_WIN = init_window.c
+
 FILES = main.c\
 		$(addprefix fill_struct/, $(FILL_STRUCT))\
 		$(addprefix utils/, $(UTILS))\
-		$(addprefix validation/, $(VALIDATION))
+		$(addprefix validation/, $(VALIDATION))\
+		$(addprefix window/, $(INIT_WIN))
 
 LIBFT = ./libs/libft/
 
@@ -23,7 +26,9 @@ LIBMLX_A = $(LIBMLX)libmlx_Linux.a
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -Lmlx -lXext -lX11
+FLAGS = -Wall -Wextra -Werror
+
+MLXFLAGS = -Lmlx -lXext -lX11
 
 RM = rm -rf
 
@@ -36,7 +41,7 @@ $(LIBMLX_A):
 			$(MAKE) -C $(LIBMLX)
 
 $(NAME): $(LIBFT_A) $(LIBMLX_A)
-			$(CC) $(CFLAGS) $(addprefix ./src/, $(FILES)) $(LIBFT_A) $(LIBMLX_A) -o $(NAME)
+			$(CC) $(CFLAGS) $(addprefix ./src/, $(FILES)) $(LIBFT_A) $(LIBMLX_A) $(MLXFLAGS) -o $(NAME)
 
 clean:
 			$(MAKE) clean -C $(LIBFT)

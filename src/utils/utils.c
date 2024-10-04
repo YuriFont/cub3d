@@ -37,10 +37,25 @@ void	free_cub(t_cub *cub, int flag)
 	}
 }
 
-int	error(char *msg, t_cub *cub, int flag)
+void	destroy_window(t_cub *cub)
+{
+	mlx_destroy_window(cub->ptr_mlx, cub->w_mlx);
+	mlx_destroy_display(cub->ptr_mlx);
+	free(cub->ptr_mlx);
+}
+
+void	final_free(t_cub *cub)
+{
+	free_cub(cub, 3);
+	destroy_window(cub);
+}
+
+int	error(char *msg, t_cub *cub, int flag, int win)
 {
 	if (flag)
 		free_cub(cub, flag);
+	if (win)
+		destroy_window(cub);
 	ft_fprintf(2, "%s", msg);
 	exit(1);
 }

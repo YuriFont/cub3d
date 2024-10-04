@@ -28,7 +28,7 @@ static void	validate_chars(t_cub *cub)
 		while (map[i][j])
 		{
 			if (check_character(map[i][j]))
-				error("Error: invalid character in map\n", cub, 3);
+				error("Error: invalid character in map\n", cub, 3, 0);
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 				position++;
@@ -37,7 +37,7 @@ static void	validate_chars(t_cub *cub)
 		i++;
 	}
 	if (position != 1)
-		error("Error: invalid quantity of player start position\n", cub, 3);
+		error("Error: invalid quantity of player start position\n", cub, 3, 0);
 }
 
 static void	validate_sides(t_cub *cub)
@@ -56,7 +56,7 @@ static void	validate_sides(t_cub *cub)
 			j++;
 		k = ft_strlen(map[i]) - 1;
 		if (map[i][j] != '1' || map[i][k] != '1')
-			error("Error: the map is not surrounded by walls\n", cub, 3);
+			error("Error: the map is not surrounded by walls\n", cub, 3, 0);
 		i++;
 	}
 }
@@ -76,7 +76,7 @@ static void	validate_top(t_cub *cub)
 		while (map[i][j] == ' ')
 			i++;
 		if (map[i][j] != '1')
-			error("Error: the map is not surrounded by walls\n", cub, 3);
+			error("Error: the map is not surrounded by walls\n", cub, 3, 0);
 		j++;
 	}
 }
@@ -96,7 +96,7 @@ static void	validate_bottom(t_cub *cub)
 		while (map[i][j] == ' ')
 			i--;
 		if (map[i][j] != '1')
-			error("Error: the map is not surrounded by walls\n", cub, 3);
+			error("Error: the map is not surrounded by walls\n", cub, 3, 0);
 		j++;
 	}
 }

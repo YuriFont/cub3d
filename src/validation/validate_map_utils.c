@@ -35,7 +35,7 @@ void	validate_spaces(t_cub *cub)
 		{
 			if (map[i][j] == ' '
 				&& check_around(map, i, j, cub->info_map.height))
-				error("Error: the map is not surrounded by walls\n", cub, 3);
+				error("Error: the map is not surrounded by walls\n", cub, 3, 0);
 			j++;
 		}
 		i++;
@@ -60,7 +60,7 @@ void	validate_unevenness_top(t_cub *cub)
 			while (j >= line)
 			{
 				if (map[i][j] != '1')
-					error("Error: map is not surrounded by walls\n", cub, 3);
+					error("Error: map is not surrounded by walls\n", cub, 3, 0);
 				j--;
 			}
 		}
@@ -86,7 +86,7 @@ void	validate_unevenness_bot(t_cub *cub)
 			while (j >= line)
 			{
 				if (map[i][j] != '1')
-					error("Error: map is not surrounded by walls\n", cub, 3);
+					error("Error: map is not surrounded by walls\n", cub, 3, 0);
 				j--;
 			}
 		}

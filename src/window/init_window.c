@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 12:13:32 by yufonten          #+#    #+#             */
-/*   Updated: 2024/09/14 12:13:32 by yufonten         ###   ########.fr       */
+/*   Created: 2024/10/03 22:17:22 by yufonten          #+#    #+#             */
+/*   Updated: 2024/10/03 22:17:22 by yufonten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
-int	main(int ac, char **av)
+void initializing_window(t_cub *cub)
 {
-	t_cub	cub;
-
-	if (ac != 2)
-		error("Error: cub3D only accepts one parameter\n", NULL, 0, 0);
-	fill_struct(&cub, av[1]);
-	validate_map(&cub);
-	initializing_window(&cub);
-	final_free(&cub);
-	return (0);
+	cub->ptr_mlx = mlx_init();
+	if (!cub->ptr_mlx)
+		error("Error: cannot init ptr_mlx\n", cub, 3, 0);
+	cub->w_mlx = mlx_new_window(cub->ptr_mlx, 905, 1420, "Cub3D");
+	if (!cub->w_mlx)
+    {
+        free(cub->ptr_mlx);
+		error("Error: cannot init window\n", cub, 3, 0);
+    }
 }

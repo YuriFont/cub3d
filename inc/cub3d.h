@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../libs/libft/libft.h"
+# include "../libs/minilibx-linux/mlx.h"
 
 typedef	struct s_tex
 {
@@ -40,7 +41,8 @@ typedef struct s_cub
 	int		fd_cub;
 	t_tex	tex;
 	t_map	info_map;
-	char	**map;
+	void	*ptr_mlx;
+	void	*w_mlx;
 }	t_cub;
 
 //fill_struct
@@ -50,7 +52,8 @@ void	fill_struct(t_cub *cub, char *file);
 //utils
 //utils.c
 void	free_cub(t_cub *cub, int flag);
-int	    error(char *msg, t_cub *cub, int flag);
+int	    error(char *msg, t_cub *cub, int flag, int win);
+void	final_free(t_cub *cub);
 
 //validation
 //validate_map.c
@@ -62,5 +65,9 @@ void	validate_unevenness_bot(t_cub *cub);
 void	validate_unevenness_top(t_cub *cub);
 //check_around.c
 int		check_around(char **map, int y, int x, int h);
+
+//window
+//init_window.c
+void	initializing_window(t_cub *cub);
 
 #endif
