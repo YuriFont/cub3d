@@ -53,7 +53,7 @@ void	fill_struct(t_cub *cub, char *file);
 //utils.c
 void	free_cub(t_cub *cub, int flag);
 int	    error(char *msg, t_cub *cub, int flag, int win);
-void	final_free(t_cub *cub);
+int		final_free(t_cub *cub);
 
 //validation
 //validate_map.c

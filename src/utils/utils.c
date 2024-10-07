@@ -44,10 +44,12 @@ void	destroy_window(t_cub *cub)
 	free(cub->ptr_mlx);
 }
 
-void	final_free(t_cub *cub)
+int	final_free(t_cub *cub)
 {
 	free_cub(cub, 3);
 	destroy_window(cub);
+	exit(0);
+	return(0);
 }
 
 int	error(char *msg, t_cub *cub, int flag, int win)
