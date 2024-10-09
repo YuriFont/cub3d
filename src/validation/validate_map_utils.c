@@ -27,14 +27,14 @@ void	validate_spaces(t_cub *cub)
 	char	**map;
 
 	i = 0;
-	map = cub->info_map.map;
+	map = cub->i_map.map;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
 			if (map[i][j] == ' '
-				&& check_around(map, i, j, cub->info_map.height))
+				&& check_around(map, i, j, cub->i_map.height))
 				error("Error: the map is not surrounded by walls\n", cub, 3, 0);
 			j++;
 		}
@@ -50,8 +50,8 @@ void	validate_unevenness_top(t_cub *cub)
 	char	**map;
 
 	i = 0;
-	map = cub->info_map.map;
-	while (i < cub->info_map.height)
+	map = cub->i_map.map;
+	while (i < cub->i_map.height)
 	{
 		if ((ft_strlen(map[i]) - ft_strlen(map[i + 1])) > 0)
 		{
@@ -75,8 +75,8 @@ void	validate_unevenness_bot(t_cub *cub)
 	int		line;
 	char	**map;
 
-	i = cub->info_map.height;
-	map = cub->info_map.map;
+	i = cub->i_map.height;
+	map = cub->i_map.map;
 	while (i > 0)
 	{
 		if ((ft_strlen(map[i]) - ft_strlen(map[i - 1])) > 0)

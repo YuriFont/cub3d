@@ -31,9 +31,9 @@ void	free_cub(t_cub *cub, int flag)
 	if (flag >= 3)
 	{
 		i = 0;
-		while (cub->info_map.map[i] != 0)
-			free(cub->info_map.map[i++]);
-		free(cub->info_map.map);
+		while (cub->i_map.map[i] != 0)
+			free(cub->i_map.map[i++]);
+		free(cub->i_map.map);
 	}
 }
 

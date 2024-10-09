@@ -34,13 +34,15 @@ typedef	struct s_map
 {
 	char	**map;
 	int		height;
+	int		x_player;
+	int		y_player;
 }	t_map;
 
 typedef struct s_cub
 {
 	int		fd_cub;
 	t_tex	tex;
-	t_map	info_map;
+	t_map	i_map;
 	void	*ptr_mlx;
 	void	*w_mlx;
 }	t_cub;
@@ -48,6 +50,8 @@ typedef struct s_cub
 //fill_struct
 //fill_struct.c
 void	fill_struct(t_cub *cub, char *file);
+//fill_struct_utils.c
+void    fill_player_info(t_cub *cub);
 
 //utils
 //utils.c

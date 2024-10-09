@@ -21,7 +21,7 @@ static void	validate_chars(t_cub *cub)
 
 	i = 0;
 	position = 0;
-	map = cub->info_map.map;
+	map = cub->i_map.map;
 	while (map[i])
 	{
 		j = 0;
@@ -47,7 +47,7 @@ static void	validate_sides(t_cub *cub)
 	int		j;
 	int		k;
 
-	map = cub->info_map.map;
+	map = cub->i_map.map;
 	i = 0;
 	while (map[i])
 	{
@@ -67,7 +67,7 @@ static void	validate_top(t_cub *cub)
 	int		i;
 	int		j;
 
-	map = cub->info_map.map;
+	map = cub->i_map.map;
 	j = 0;
 	i = 0;
 	while (map[i][j])
@@ -87,12 +87,12 @@ static void	validate_bottom(t_cub *cub)
 	int		j;
 	char	**map;
 
-	map = cub->info_map.map;
+	map = cub->i_map.map;
 	j = 0;
-	i = cub->info_map.height;
+	i = cub->i_map.height;
 	while (map[i][j])
 	{
-		i = cub->info_map.height;
+		i = cub->i_map.height;
 		while (map[i][j] == ' ')
 			i--;
 		if (map[i][j] != '1')
@@ -106,9 +106,9 @@ void	validate_map(t_cub *cub)
 	int	i;
 
 	i = 0;
-	while (cub->info_map.map[i])
+	while (cub->i_map.map[i])
 		i++;
-	cub->info_map.height = i - 1;
+	cub->i_map.height = i - 1;
 	validate_chars(cub);
 	validate_sides(cub);
 	validate_spaces(cub);

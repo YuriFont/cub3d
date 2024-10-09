@@ -83,7 +83,7 @@ static	void	fill_map(t_cub *cub)
 		free(holder);
 	}
 	free(line);
-	cub->info_map.map = ft_split(holder_map, '\n');
+	cub->i_map.map = ft_split(holder_map, '\n');
 	free(holder_map);
 }
 
@@ -93,5 +93,6 @@ void	fill_struct(t_cub *cub, char *file)
 	fill_textures(cub);
 	fill_colors(cub);
 	fill_map(cub);
+	fill_player_info(cub);
 	close(cub->fd_cub);
 }
