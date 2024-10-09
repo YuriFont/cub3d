@@ -38,11 +38,18 @@ typedef	struct s_map
 	int		y_player;
 }	t_map;
 
+typedef struct s_win
+{
+	int	w_width;
+	int	w_height;
+}	t_win;
+
 typedef struct s_cub
 {
 	int		fd_cub;
 	t_tex	tex;
 	t_map	i_map;
+	t_win	i_win;
 	void	*ptr_mlx;
 	void	*w_mlx;
 }	t_cub;

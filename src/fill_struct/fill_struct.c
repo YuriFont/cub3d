@@ -48,20 +48,31 @@ static void	fill_textures(t_cub *cub)
 	i = 0;
 	while (i < 4)
 		free(line[i++]);
+	printf("North texture: %s\n", cub->tex.no);
+	printf("South texture: %s\n", cub->tex.so);
+	printf("West texture: %s\n", cub->tex.we);
+	printf("East texture: %s\n", cub->tex.ea);
 }
 
 static void	fill_colors(t_cub *cub)
 {
-	char	*line;
+	char	*line[3];
+	int		i;
 
-	line = get_next_line(cub->fd_cub);
-	free(line);
-	cub->tex.cf = get_next_line(cub->fd_cub);
-	cub->tex.cc = get_next_line(cub->fd_cub);
-	if (ft_strncmp(cub->tex.cf, "F", 1))
+	i = 0;
+	while (i < 3)
+		line[i++] = get_next_line(cub->fd_cub);
+	cub->tex.cf = ft_substr(line[1], 2, ft_strlen(line[1]) - 3);
+	cub->tex.cc = ft_substr(line[2], 2, ft_strlen(line[2]) - 3);;
+	if (ft_strncmp(line[1], "F", 1))
 		error("Error: misconfiguration in floor color\n", cub, 2, 0);
-	if (ft_strncmp(cub->tex.cc, "C", 1))
+	if (ft_strncmp(line[2], "C", 1))
 		error("Error: misconfiguration in ceiling color\n", cub, 2, 0);
+	i = 0;
+	while (i < 3)
+		free(line[i++]);
+	printf("Colors floor: %s\n", cub->tex.cf);
+	printf("Colors ceiling: %s\n", cub->tex.cc);
 }
 
 static	void	fill_map(t_cub *cub)

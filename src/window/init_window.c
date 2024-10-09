@@ -14,14 +14,13 @@
 
 void initializing_window(t_cub *cub)
 {
-	int	s_width;
-	int	s_height;
-
 	cub->ptr_mlx = mlx_init();
 	if (!cub->ptr_mlx)
 		error("Error: cannot init ptr_mlx\n", cub, 3, 0);
-	mlx_get_screen_size(cub->ptr_mlx, &s_width, &s_height);
-	cub->w_mlx = mlx_new_window(cub->ptr_mlx, s_width - 20, s_height - 100, "Cub3D");
+	mlx_get_screen_size(cub->ptr_mlx, &cub->i_win.w_width,
+		&cub->i_win.w_height);
+	cub->w_mlx = mlx_new_window(cub->ptr_mlx, cub->i_win.w_width - 20,
+		cub->i_win.w_height - 100, "Cub3D");
 	if (!cub->w_mlx)
     {
         free(cub->ptr_mlx);
