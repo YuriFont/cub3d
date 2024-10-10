@@ -28,8 +28,8 @@ void    fill_player_info(t_cub *cub)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				cub->i_map.y_player = i;
-				cub->i_map.x_player = j;
+				cub->i_map.y_player = (double)i;
+				cub->i_map.x_player = (double)j;
 				return ;
 			}
 			j++;

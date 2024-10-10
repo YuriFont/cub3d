@@ -11,11 +11,14 @@ UTILS = utils.c
 
 INIT_WIN = init_window.c
 
+RAY = ray_casting.c
+
 FILES = main.c\
 		$(addprefix fill_struct/, $(FILL_STRUCT))\
 		$(addprefix utils/, $(UTILS))\
 		$(addprefix validation/, $(VALIDATION))\
-		$(addprefix window/, $(INIT_WIN))
+		$(addprefix window/, $(INIT_WIN))\
+		$(addprefix ray_casting/, $(RAY))
 
 LIBFT = ./libs/libft/
 

@@ -104,10 +104,16 @@ static void	validate_bottom(t_cub *cub)
 void	validate_map(t_cub *cub)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	cub->i_map.width = 0;
 	while (cub->i_map.map[i])
+	{
+		if (cub->i_map.width < ft_strlen(cub->i_map.map[i]))
+			cub->i_map.width = ft_strlen(cub->i_map.map[i]);
 		i++;
+	}
 	cub->i_map.height = i - 1;
 	validate_chars(cub);
 	validate_sides(cub);
@@ -116,4 +122,5 @@ void	validate_map(t_cub *cub)
 	validate_bottom(cub);
 	validate_unevenness_top(cub);
 	validate_unevenness_bot(cub);
+	printf("Height: %d\n Width: %d\n", cub->i_map.height, cub->i_map.width);
 }
