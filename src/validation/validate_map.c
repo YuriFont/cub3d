@@ -104,7 +104,6 @@ static void	validate_bottom(t_cub *cub)
 void	validate_map(t_cub *cub)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	cub->i_map.width = 0;
@@ -122,5 +121,4 @@ void	validate_map(t_cub *cub)
 	validate_bottom(cub);
 	validate_unevenness_top(cub);
 	validate_unevenness_bot(cub);
-	printf("Height: %d\n Width: %d\n", cub->i_map.height, cub->i_map.width);
 }

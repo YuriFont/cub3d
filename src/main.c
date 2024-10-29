@@ -21,7 +21,6 @@ int	main(int ac, char **av)
 	fill_struct(&cub, av[1]);
 	validate_map(&cub);
 	initializing_window(&cub);
-	ray_casting(cub.ptr_mlx, cub.w_mlx);
 	mlx_key_hook(cub.w_mlx, key_press, &cub);
 	mlx_loop(cub.ptr_mlx);
 	return (0);

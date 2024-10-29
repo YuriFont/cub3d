@@ -22,7 +22,7 @@ void initializing_window(t_cub *cub)
 	cub->i_win.w_width = cub->i_win.w_width - 20;
 	cub->i_win.w_height = cub->i_win.w_height - 100;
 	cub->w_mlx = mlx_new_window(cub->ptr_mlx,
-		640, 480, "Cub3D");
+		cub->i_win.w_width, cub->i_win.w_height, "Cub3D");
 	if (!cub->w_mlx)
     {
         free(cub->ptr_mlx);

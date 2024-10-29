@@ -33,11 +33,11 @@ typedef	struct s_tex
 
 typedef	struct s_map
 {
-	char		**map;
-	int			height;
-	int			width;
-	double		x_player;
-	double		y_player;
+	char	**map;
+	int		height;
+	int		width;
+	double	x_player;
+	double	y_player;
 }	t_map;
 
 typedef struct s_win
@@ -84,8 +84,6 @@ int		check_around(char **map, int y, int x, int h);
 void	initializing_window(t_cub *cub);
 
 //ray_casting
-//ray_casting.c
-void	ray_casting(void *mlx, void *win);
-int		key_press(int keycode, t_cub *cub);
+
 
 #endif

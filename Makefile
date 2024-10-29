@@ -17,8 +17,7 @@ FILES = main.c\
 		$(addprefix fill_struct/, $(FILL_STRUCT))\
 		$(addprefix utils/, $(UTILS))\
 		$(addprefix validation/, $(VALIDATION))\
-		$(addprefix window/, $(INIT_WIN))\
-		$(addprefix ray_casting/, $(RAY))
+		$(addprefix window/, $(INIT_WIN))
 
 LIBFT = ./libs/libft/
 

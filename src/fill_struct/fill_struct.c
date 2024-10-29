@@ -48,10 +48,6 @@ static void	fill_textures(t_cub *cub)
 	i = 0;
 	while (i < 4)
 		free(line[i++]);
-	printf("North texture: %s\n", cub->tex.no);
-	printf("South texture: %s\n", cub->tex.so);
-	printf("West texture: %s\n", cub->tex.we);
-	printf("East texture: %s\n", cub->tex.ea);
 }
 
 static void	fill_colors(t_cub *cub)
@@ -71,8 +67,6 @@ static void	fill_colors(t_cub *cub)
 	i = 0;
 	while (i < 3)
 		free(line[i++]);
-	printf("Colors floor: %s\n", cub->tex.cf);
-	printf("Colors ceiling: %s\n", cub->tex.cc);
 }
 
 static	void	fill_map(t_cub *cub)
