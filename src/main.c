@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	fill_struct(&cub, av[1]);
 	validate_map(&cub);
 	initializing_window(&cub);
-	mlx_key_hook(cub.w_mlx, key_press, &cub);
+	mlx_hook(cub.w_mlx, 17, 0, final_free, &cub);
 	mlx_loop(cub.ptr_mlx);
 	return (0);
 }
