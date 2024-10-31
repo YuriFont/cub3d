@@ -23,11 +23,6 @@ void	free_cub(t_cub *cub, int flag)
 		free(cub->tex.we);
 		free(cub->tex.ea);
 	}
-	if (flag >= 2)
-	{
-		free(cub->tex.cf);
-		free(cub->tex.cc);
-	}
 	if (flag >= 3)
 	{
 		i = 0;

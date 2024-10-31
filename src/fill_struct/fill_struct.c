@@ -37,6 +37,9 @@ static void	fill_textures(t_cub *cub)
 	cub->tex.so = ft_substr(line[1], 3, ft_strlen(line[1]) - 4);
 	cub->tex.we = ft_substr(line[2], 3, ft_strlen(line[2]) - 4);
 	cub->tex.ea = ft_substr(line[3], 3, ft_strlen(line[3]) - 4);
+	i = 0;
+	while (i < 4)
+		free(line[i++]);
 	if (ft_strncmp(line[0], "NO", 2) || open(cub->tex.no, O_RDONLY) == -1)
 		error("Error: misconfiguration in north texture\n", cub, 1, 0);
 	if (ft_strncmp(line[1], "SO", 2) || open(cub->tex.so, O_RDONLY) == -1)
@@ -45,28 +48,44 @@ static void	fill_textures(t_cub *cub)
 		error("Error: misconfiguration in west texture\n", cub, 1, 0);
 	if (ft_strncmp(line[3], "EA", 2) || open(cub->tex.ea, O_RDONLY) == -1)
 		error("Error: misconfiguration in east texture\n", cub, 1, 0);
-	i = 0;
-	while (i < 4)
-		free(line[i++]);
 }
 
 static void	fill_colors(t_cub *cub)
 {
 	char	*line[3];
+	char	**cf;
+	char	**cc;
+	char	*linet;
+	char 	*linec;
 	int		i;
 
 	i = 0;
 	while (i < 3)
 		line[i++] = get_next_line(cub->fd_cub);
-	cub->tex.cf = ft_substr(line[1], 2, ft_strlen(line[1]) - 3);
-	cub->tex.cc = ft_substr(line[2], 2, ft_strlen(line[2]) - 3);;
 	if (ft_strncmp(line[1], "F", 1))
 		error("Error: misconfiguration in floor color\n", cub, 2, 0);
 	if (ft_strncmp(line[2], "C", 1))
 		error("Error: misconfiguration in ceiling color\n", cub, 2, 0);
+	linet = ft_substr(line[1], 2, ft_strlen(line[1]) - 3);
+	linec = ft_substr(line[2], 2, ft_strlen(line[2]) - 3);
+	cf = ft_split(linet, ',');
+	cc = ft_split(linec, ',');
 	i = 0;
 	while (i < 3)
-		free(line[i++]);
+	{
+		cub->tex.cf[i] = ft_atoi(cf[i]);
+		cub->tex.cc[i] = ft_atoi(cc[i]);
+		free(cf[i]);
+		free(cc[i]);
+		i++;
+	}
+	free(linet);
+	free(linec);
+	free(cf);
+	free(cc);
+	free(line[0]);
+	free(line[1]);
+	free(line[2]);
 }
 
 static	void	fill_map(t_cub *cub)

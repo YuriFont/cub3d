@@ -27,8 +27,8 @@ typedef	struct s_tex
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*cf;
-	char	*cc;
+	int		cf[3];
+	int		cc[3];
 }	t_tex;
 
 typedef	struct s_map
