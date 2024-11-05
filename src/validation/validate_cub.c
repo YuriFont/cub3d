@@ -12,17 +12,17 @@
 
 #include "../../inc/cub3d.h"
 
-void	validate_tex(int fd, char *cp)
+void	validate_tex(t_cub *cub, char *cp)
 {
 	char	*line;
 	char	*path;
 	int		fd_v;
 
-	line = get_next_line(fd);
+	line = get_next_line(cub->fd_cub);
 	if (!line || ft_strlen(line) < 10 || ft_strncmp(line, cp, 2))
 	{
 		free(line);
-		close(fd);
+		close(cub->fd_cub);
 		error("Error: misconfiguration in textures\n");
 	}
 	path = ft_substr(line, 3, ft_strlen(line) - 4);
@@ -31,7 +31,7 @@ void	validate_tex(int fd, char *cp)
 		close(fd_v);
 		free(path);
 		free(line);
-		close(fd);
+		close(cub->fd_cub);
 		error("Error: misconfiguration in textures\n");
 	}
 	close(fd_v);
@@ -39,7 +39,7 @@ void	validate_tex(int fd, char *cp)
 	free(line);
 }
 
-void	validate_rgb(int fd, char *fc)
+void	validate_rgb(t_cub *cub, char *fc)
 {
 	char	*line;
 	char	*temp;
@@ -47,11 +47,11 @@ void	validate_rgb(int fd, char *fc)
 	int		e;
 	int		i;
 
-	line = get_next_line(fd);
+	line = get_next_line(cub->fd_cub);
 	if (!line || ft_strlen(line) < 7 || ft_strncmp(line, fc, 2))
 	{
 		free(line);
-		close(fd);
+		close(cub->fd_cub);
 		error("Error: misconfiguration in floor or ceiling\n");
 	}
 	temp = ft_substr(line, 2, ft_strlen(line) - 3);
@@ -59,7 +59,7 @@ void	validate_rgb(int fd, char *fc)
 	e = -1;
 	if (size_rgb(n) || validate_hx(n[0]) || validate_hx(n[1])
 		|| validate_hx(n[2]))
-		e = close(fd);
+		e = close(cub->fd_cub);
 	free(temp);
 	free(line);
 	free_matriz(n);
@@ -69,23 +69,21 @@ void	validate_rgb(int fd, char *fc)
 
 void    validate_cub(t_cub *cub, char *file)
 {
-    int 	fd;
 	char	*l;
 
-	if ((fd = open(file, O_RDONLY)) == -1)
+	if ((cub->fd_cub = open(file, O_RDONLY)) == -1)
 	{
 		ft_fprintf(2, "Error: cannot open this file\n");
-		close(fd);
+		close(cub->fd_cub);
 		exit(1);
 	}
     validate_extension_cub(file);
-    validate_tex(fd, "NO");
-	validate_tex(fd, "SO");
-	validate_tex(fd, "WE");
-	validate_tex(fd, "EA");
-	l = get_next_line(fd);
+    validate_tex(cub, "NO");
+	validate_tex(cub, "SO");
+	validate_tex(cub, "WE");
+	validate_tex(cub, "EA");
+	l = get_next_line(cub->fd_cub);
 	free(l);
-	validate_rgb(fd, "F ");
-	validate_rgb(fd, "C ");
-	close(fd);
+	validate_rgb(cub, "F ");
+	validate_rgb(cub, "C ");
 }

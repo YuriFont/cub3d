@@ -6,8 +6,7 @@ VALIDATION = validate_map.c\
 				validate_cub.c\
 				validate_utils.c
 
-FILL_STRUCT = fill_struct.c\
-				fill_struct_utils.c
+FILL_STRUCT = fill_struct.c
 
 UTILS = utils.c
 
@@ -17,7 +16,8 @@ RAY = ray_casting.c
 
 FILES = main.c\
 		$(addprefix utils/, $(UTILS))\
-		$(addprefix validation/, $(VALIDATION))
+		$(addprefix validation/, $(VALIDATION))\
+		$(addprefix fill_struct/, $(FILL_STRUCT))
 
 LIBFT = ./libs/libft/
 

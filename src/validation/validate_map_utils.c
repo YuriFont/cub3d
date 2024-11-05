@@ -12,12 +12,14 @@
 
 #include "../../inc/cub3d.h"
 
-int	check_character(char c)
+void	check_character(t_cub *cub, char c)
 {
 	if (c != '0' && c != '1' && c != 'N' && c != 'S'
 		&& c != 'E' && c != 'W' && c != ' ')
-		return (1);
-	return (0);
+	{
+		free_matriz(cub->i_map.map);
+		error("Error: invalid character in map\n");
+	}
 }
 
 void	validate_spaces(t_cub *cub)
@@ -35,7 +37,10 @@ void	validate_spaces(t_cub *cub)
 		{
 			if (map[i][j] == ' '
 				&& check_around(map, i, j, cub->i_map.height))
+			{
+				free_matriz(cub->i_map.map);
 				error("Error: the map is not surrounded by walls\n");
+			}
 			j++;
 		}
 		i++;
@@ -60,7 +65,10 @@ void	validate_unevenness_top(t_cub *cub)
 			while (j >= line)
 			{
 				if (map[i][j] != '1')
+				{
+					free_matriz(cub->i_map.map);
 					error("Error: map is not surrounded by walls\n");
+				}
 				j--;
 			}
 		}
@@ -86,7 +94,10 @@ void	validate_unevenness_bot(t_cub *cub)
 			while (j >= line)
 			{
 				if (map[i][j] != '1')
+				{
+					free_matriz(cub->i_map.map);
 					error("Error: map is not surrounded by walls\n");
+				}
 				j--;
 			}
 		}

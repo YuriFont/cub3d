@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "../../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
-static void	fill_textures(t_cub *cub)
+/*static void	fill_textures(t_cub *cub)
 {
 	char	*line[4];
 	int		i;
@@ -70,9 +70,9 @@ static void	fill_colors(t_cub *cub)
 	free(line[0]);
 	free(line[1]);
 	free(line[2]);
-}
+}*/
 
-static	void	fill_map(t_cub *cub)
+void	fill_map(t_cub *cub)
 {
 	char	*line;
 	char	*holder_map;
@@ -95,7 +95,7 @@ static	void	fill_map(t_cub *cub)
 	free(holder_map);
 }
 
-void	fill_struct(t_cub *cub, char *file)
+/*void	fill_struct(t_cub *cub, char *file)
 {
 	validate_extension_cub(cub, file);
 	fill_textures(cub);
