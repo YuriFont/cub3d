@@ -2,7 +2,9 @@ NAME = cub3D
 
 VALIDATION = validate_map.c\
 				validate_map_utils.c\
-				check_around.c
+				check_around.c\
+				validate_cub.c\
+				validate_utils.c
 
 FILL_STRUCT = fill_struct.c\
 				fill_struct_utils.c
@@ -14,10 +16,8 @@ INIT_WIN = init_window.c
 RAY = ray_casting.c
 
 FILES = main.c\
-		$(addprefix fill_struct/, $(FILL_STRUCT))\
 		$(addprefix utils/, $(UTILS))\
-		$(addprefix validation/, $(VALIDATION))\
-		$(addprefix window/, $(INIT_WIN))
+		$(addprefix validation/, $(VALIDATION))
 
 LIBFT = ./libs/libft/
 

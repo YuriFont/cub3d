@@ -56,19 +56,21 @@ typedef struct s_cub
 	void	*w_mlx;
 }	t_cub;
 
-//fill_struct
-//fill_struct.c
-void	fill_struct(t_cub *cub, char *file);
-//fill_struct_utils.c
-void    fill_player_info(t_cub *cub);
 
 //utils
 //utils.c
 void	free_cub(t_cub *cub, int flag);
-int	    error(char *msg, t_cub *cub, int flag, int win);
+int	    error(char *msg);
 int		final_free(t_cub *cub);
-
+void	free_matriz(char **mat);
 //validation
+//validate_cub.c
+void    validate_cub(t_cub *cub, char *file);
+//validate_utils.c
+void	validate_extension_cub(char *file);
+int		validate_extension_xpm(char *file);
+int		validate_hx(char *num);
+int		size_rgb(char **n);
 //validate_map.c
 void	validate_map(t_cub *cub);
 //validate_map_utils.c
@@ -82,7 +84,7 @@ int		check_around(char **map, int y, int x, int h);
 //window
 //init_window.c
 void	initializing_window(t_cub *cub);
-
+void    fill_player_info(t_cub *cub);
 //ray_casting
 
 

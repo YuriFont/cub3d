@@ -12,26 +12,6 @@
 
 #include "../../inc/cub3d.h"
 
-void	free_cub(t_cub *cub, int flag)
-{
-	int	i;
-
-	if (flag >= 1)
-	{
-		free(cub->tex.no);
-		free(cub->tex.so);
-		free(cub->tex.we);
-		free(cub->tex.ea);
-	}
-	if (flag >= 3)
-	{
-		i = 0;
-		while (cub->i_map.map[i] != 0)
-			free(cub->i_map.map[i++]);
-		free(cub->i_map.map);
-	}
-}
-
 void	destroy_window(t_cub *cub)
 {
 	mlx_destroy_window(cub->ptr_mlx, cub->w_mlx);
@@ -39,20 +19,26 @@ void	destroy_window(t_cub *cub)
 	free(cub->ptr_mlx);
 }
 
-int	final_free(t_cub *cub)
+void	free_matriz(char **mat)
 {
-	free_cub(cub, 3);
+	int	i;
+
+	i = 0;
+	while (mat[i] != 0)
+		free(mat[i++]);
+	free(mat);
+}
+
+int	final_free(t_cub *cub)
+{	
+	//free_cub(cub, 3);
 	destroy_window(cub);
 	exit(0);
 	return(0);
 }
 
-int	error(char *msg, t_cub *cub, int flag, int win)
+int	error(char *msg)
 {
-	if (flag)
-		free_cub(cub, flag);
-	if (win)
-		destroy_window(cub);
 	ft_fprintf(2, "%s", msg);
 	exit(1);
 }

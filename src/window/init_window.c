@@ -16,7 +16,7 @@ void initializing_window(t_cub *cub)
 {
 	cub->ptr_mlx = mlx_init();
 	if (!cub->ptr_mlx)
-		error("Error: cannot init ptr_mlx\n", cub, 3, 0);
+		error("Error: cannot init ptr_mlx\n");
 	mlx_get_screen_size(cub->ptr_mlx, &cub->i_win.w_width,
 		&cub->i_win.w_height);
 	cub->i_win.w_width = cub->i_win.w_width - 20;
@@ -26,6 +26,6 @@ void initializing_window(t_cub *cub)
 	if (!cub->w_mlx)
     {
         free(cub->ptr_mlx);
-		error("Error: cannot init window\n", cub, 3, 0);
+		error("Error: cannot init window\n");
     }
 }
