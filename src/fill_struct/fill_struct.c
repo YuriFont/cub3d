@@ -100,7 +100,6 @@ void	fill_map(t_cub *cub)
 	validate_extension_cub(cub, file);
 	fill_textures(cub);
 	fill_colors(cub);
-	fill_map(cub);
 	fill_player_info(cub);
 	close(cub->fd_cub);
 }*/
