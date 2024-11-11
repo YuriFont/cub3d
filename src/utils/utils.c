@@ -31,8 +31,12 @@ void	free_matriz(char **mat)
 
 int	final_free(t_cub *cub)
 {	
-	//free_cub(cub, 3);
-	destroy_window(cub);
+	//destroy_window(cub);
+	free_matriz(cub->i_map.map);
+	free(cub->tex.no);
+	free(cub->tex.so);
+	free(cub->tex.we);
+	free(cub->tex.ea);
 	exit(0);
 	return(0);
 }

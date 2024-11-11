@@ -12,7 +12,7 @@
 
 #include "../../inc/cub3d.h"
 
-/*static void	fill_textures(t_cub *cub)
+static void	fill_textures(t_cub *cub)
 {
 	char	*line[4];
 	int		i;
@@ -24,53 +24,42 @@
 	cub->tex.so = ft_substr(line[1], 3, ft_strlen(line[1]) - 4);
 	cub->tex.we = ft_substr(line[2], 3, ft_strlen(line[2]) - 4);
 	cub->tex.ea = ft_substr(line[3], 3, ft_strlen(line[3]) - 4);
-	if (ft_strncmp(line[0], "NO", 2) || open(cub->tex.no, O_RDONLY) == -1)
-		error("Error: misconfiguration in north texture\n");
-	if (ft_strncmp(line[1], "SO", 2) || open(cub->tex.so, O_RDONLY) == -1)
-		error("Error: misconfiguration in south texture\n");
-	if (ft_strncmp(line[2], "WE", 2) || open(cub->tex.we, O_RDONLY) == -1)
-		error("Error: misconfiguration in west texture\n");
-	if (ft_strncmp(line[3], "EA", 2) || open(cub->tex.ea, O_RDONLY) == -1)
-		error("Error: misconfiguration in east texture\n");
+	free(line[0]);
+	free(line[1]);
+	free(line[2]);
+	free(line[3]);
+	printf("TEXTURES  - \n NO: %s\n SO: %s\n EA: %s\n WE: %s\n", cub->tex.no, cub->tex.so, cub->tex.ea, cub->tex.we);
 }
 
 static void	fill_colors(t_cub *cub)
 {
 	char	*line[3];
-	char	**cf;
-	char	**cc;
-	char	*linet;
-	char 	*linec;
+	char	**c[2];
+	char 	*linec[2];
 	int		i;
 
 	i = 0;
 	while (i < 3)
 		line[i++] = get_next_line(cub->fd_cub);
-	if (ft_strncmp(line[1], "F", 1))
-		error("Error: misconfiguration in floor color\n");
-	if (ft_strncmp(line[2], "C", 1))
-		error("Error: misconfiguration in ceiling color\n");
-	linet = ft_substr(line[1], 2, ft_strlen(line[1]) - 3);
-	linec = ft_substr(line[2], 2, ft_strlen(line[2]) - 3);
-	cf = ft_split(linet, ',');
-	cc = ft_split(linec, ',');
-	i = 0;
-	while (i < 3)
+	linec[0] = ft_substr(line[1], 2, ft_strlen(line[1]) - 3);
+	linec[1] = ft_substr(line[2], 2, ft_strlen(line[2]) - 3);
+	c[0] = ft_split(linec[0], ',');
+	c[1] = ft_split(linec[1], ',');
+	i = -1;
+	while (++i < 3)
 	{
-		cub->tex.cf[i] = ft_atoi(cf[i]);
-		cub->tex.cc[i] = ft_atoi(cc[i]);
-		free(cf[i]);
-		free(cc[i]);
-		i++;
+		cub->tex.cf[i] = ft_atoi(c[0][i]);
+		cub->tex.cc[i] = ft_atoi(c[1][i]);
+		free(c[0][i]);
+		free(c[1][i]);
+		free(line[i]);
 	}
-	free(linet);
-	free(linec);
-	free(cf);
-	free(cc);
-	free(line[0]);
-	free(line[1]);
-	free(line[2]);
-}*/
+	free(linec[0]);
+	free(linec[1]);
+	free(c[0]);
+	free(c[1]);
+	printf("COLORS\n Ceiling: %d,%d,%d\nFloor: %d,%d,%d\n", cub->tex.cc[0], cub->tex.cc[1], cub->tex.cc[2], cub->tex.cf[0], cub->tex.cf[1], cub->tex.cf[2]);
+}
 
 void	fill_map(t_cub *cub)
 {
@@ -95,11 +84,13 @@ void	fill_map(t_cub *cub)
 	free(holder_map);
 }
 
-/*void	fill_struct(t_cub *cub, char *file)
+void	fill_struct(t_cub *cub, char *file)
 {
-	validate_extension_cub(cub, file);
+	char	*line;
+
+	cub->fd_cub = open(file, O_RDONLY);
 	fill_textures(cub);
 	fill_colors(cub);
 	fill_player_info(cub);
 	close(cub->fd_cub);
-}*/
+}

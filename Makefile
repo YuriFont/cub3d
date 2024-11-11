@@ -6,7 +6,8 @@ VALIDATION = validate_map.c\
 				validate_cub.c\
 				validate_utils.c
 
-FILL_STRUCT = fill_struct.c
+FILL_STRUCT = fill_struct.c\
+				fill_struct_utils.c
 
 UTILS = utils.c
 

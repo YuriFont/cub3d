@@ -59,8 +59,7 @@ typedef struct s_cub
 
 //utils
 //utils.c
-void	free_cub(t_cub *cub, int flag);
-int	    error(char *msg);
+int		error(char *msg);
 int		final_free(t_cub *cub);
 void	free_matriz(char **mat);
 //validation
@@ -82,7 +81,10 @@ void	validate_unevenness_top(t_cub *cub);
 int		check_around(char **map, int y, int x, int h);
 //fill_struct
 //fill_struct.c
+void	fill_struct(t_cub *cub, char *file);
 void	fill_map(t_cub *cub);
+//fil_struct_utils.c
+void    fill_player_info(t_cub *cub);
 //window
 //init_window.c
 void	initializing_window(t_cub *cub);

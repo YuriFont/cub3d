@@ -20,6 +20,9 @@ int	main(int ac, char **av)
 		error("Error: cub3D only accepts one parameter\n");
 	validate_cub(&cub, av[1]);
 	validate_map(&cub);
+	fill_struct(&cub, av[1]);
+	for (int i = 0; cub.i_map.map[i] != 0; i++)
+		printf("%s\n", cub.i_map.map[i]);
 	/*initializing_window(&cub);
 	mlx_hook(cub.w_mlx, 17, 0, final_free, &cub);
 	mlx_loop(cub.ptr_mlx);*/
