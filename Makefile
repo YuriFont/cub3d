@@ -18,7 +18,8 @@ RAY = ray_casting.c
 FILES = main.c\
 		$(addprefix utils/, $(UTILS))\
 		$(addprefix validation/, $(VALIDATION))\
-		$(addprefix fill_struct/, $(FILL_STRUCT))
+		$(addprefix fill_struct/, $(FILL_STRUCT))\
+		$(addprefix window/, $(INIT_WIN))
 
 LIBFT = ./libs/libft/
 
