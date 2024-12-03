@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 	for (int i = 0; cub.i_map.map[i] != 0; i++)
 		printf("%s\n", cub.i_map.map[i]);
 	initializing_window(&cub);
+	ray_casting(&cub);
 	mlx_hook(cub.w_mlx, 17, 0, final_free, &cub);
 	mlx_loop(cub.ptr_mlx);
 	return (0);

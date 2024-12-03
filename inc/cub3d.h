@@ -46,6 +46,11 @@ typedef struct s_win
 	int	w_height;
 }	t_win;
 
+typedef struct s_img
+{
+	
+}	t_img;
+
 typedef struct s_cub
 {
 	int		fd_cub;
