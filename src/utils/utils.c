@@ -30,19 +30,28 @@ void	free_matriz(char **mat)
 }
 
 int	final_free(t_cub *cub)
-{	
-	//destroy_window(cub);
+{
 	free_matriz(cub->i_map.map);
-	free(cub->tex.no);
-	free(cub->tex.so);
-	free(cub->tex.we);
-	free(cub->tex.ea);
+	free(cub->i_tex.no);
+	free(cub->i_tex.so);
+	free(cub->i_tex.we);
+	free(cub->i_tex.ea);
+	destroy_window(cub);
 	exit(0);
 	return(0);
 }
 
-int	error(char *msg)
+int	error(t_cub *cub, char *msg, int flag)
 {
+	if (flag)
+	{
+		free_matriz(cub->i_map.map);
+		free(cub->i_tex.no);
+		free(cub->i_tex.so);
+		free(cub->i_tex.we);
+		free(cub->i_tex.ea);
+		destroy_window(cub);
+	}
 	ft_fprintf(2, "%s", msg);
 	exit(1);
 }

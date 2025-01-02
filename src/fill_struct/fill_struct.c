@@ -20,15 +20,15 @@ static void	fill_textures(t_cub *cub)
 	i = 0;
 	while (i < 4)
 		line[i++] = get_next_line(cub->fd_cub);
-	cub->tex.no = ft_substr(line[0], 3, ft_strlen(line[0]) - 4);
-	cub->tex.so = ft_substr(line[1], 3, ft_strlen(line[1]) - 4);
-	cub->tex.we = ft_substr(line[2], 3, ft_strlen(line[2]) - 4);
-	cub->tex.ea = ft_substr(line[3], 3, ft_strlen(line[3]) - 4);
+	cub->i_tex.no = ft_substr(line[0], 3, ft_strlen(line[0]) - 4);
+	cub->i_tex.so = ft_substr(line[1], 3, ft_strlen(line[1]) - 4);
+	cub->i_tex.we = ft_substr(line[2], 3, ft_strlen(line[2]) - 4);
+	cub->i_tex.ea = ft_substr(line[3], 3, ft_strlen(line[3]) - 4);
 	free(line[0]);
 	free(line[1]);
 	free(line[2]);
 	free(line[3]);
-	printf("TEXTURES  - \n NO: %s\n SO: %s\n EA: %s\n WE: %s\n", cub->tex.no, cub->tex.so, cub->tex.ea, cub->tex.we);
+	printf("TEXTURES  - \n NO: %s\n SO: %s\n EA: %s\n WE: %s\n", cub->i_tex.no, cub->i_tex.so, cub->i_tex.ea, cub->i_tex.we);
 }
 
 static void	fill_colors(t_cub *cub)
@@ -48,8 +48,8 @@ static void	fill_colors(t_cub *cub)
 	i = -1;
 	while (++i < 3)
 	{
-		cub->tex.cf[i] = ft_atoi(c[0][i]);
-		cub->tex.cc[i] = ft_atoi(c[1][i]);
+		cub->i_tex.cf[i] = ft_atoi(c[0][i]);
+		cub->i_tex.cc[i] = ft_atoi(c[1][i]);
 		free(c[0][i]);
 		free(c[1][i]);
 		free(line[i]);
@@ -58,7 +58,7 @@ static void	fill_colors(t_cub *cub)
 	free(linec[1]);
 	free(c[0]);
 	free(c[1]);
-	printf("COLORS\n Ceiling: %d,%d,%d\nFloor: %d,%d,%d\n", cub->tex.cc[0], cub->tex.cc[1], cub->tex.cc[2], cub->tex.cf[0], cub->tex.cf[1], cub->tex.cf[2]);
+	printf("COLORS\n Ceiling: %d,%d,%d\n Floor: %d,%d,%d\n", cub->i_tex.cc[0], cub->i_tex.cc[1], cub->i_tex.cc[2], cub->i_tex.cf[0], cub->i_tex.cf[1], cub->i_tex.cf[2]);
 }
 
 void	fill_map(t_cub *cub)

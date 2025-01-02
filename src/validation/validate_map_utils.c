@@ -18,7 +18,7 @@ void	check_character(t_cub *cub, char c)
 		&& c != 'E' && c != 'W' && c != ' ')
 	{
 		free_matriz(cub->i_map.map);
-		error("Error: invalid character in map\n");
+		error(NULL, "Error: invalid character in map\n", 0);
 	}
 }
 
@@ -39,7 +39,7 @@ void	validate_spaces(t_cub *cub)
 				&& check_around(map, i, j, cub->i_map.height))
 			{
 				free_matriz(cub->i_map.map);
-				error("Error: the map is not surrounded by walls\n");
+				error(NULL, "Error: the map is not surrounded by walls\n", 0);
 			}
 			j++;
 		}
@@ -67,7 +67,7 @@ void	validate_unevenness_top(t_cub *cub)
 				if (map[i][j] != '1')
 				{
 					free_matriz(cub->i_map.map);
-					error("Error: map is not surrounded by walls\n");
+					error(NULL, "Error: map is not surrounded by walls\n", 0);
 				}
 				j--;
 			}
@@ -96,7 +96,7 @@ void	validate_unevenness_bot(t_cub *cub)
 				if (map[i][j] != '1')
 				{
 					free_matriz(cub->i_map.map);
-					error("Error: map is not surrounded by walls\n");
+					error(NULL, "Error: map is not surrounded by walls\n", 0);
 				}
 				j--;
 			}

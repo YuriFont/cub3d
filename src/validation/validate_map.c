@@ -36,7 +36,7 @@ static void	validate_chars(t_cub *cub)
 	if (position != 1)
 	{
 		free_matriz(cub->i_map.map);
-		error("Error: invalid quantity of player start position\n");
+		error(NULL, "Error: invalid quantity of player start position\n", 0);
 	}
 }
 
@@ -58,7 +58,7 @@ static void	validate_sides(t_cub *cub)
 		if (map[i][j] != '1' || map[i][k] != '1')
 		{
 			free_matriz(cub->i_map.map);
-			error("Error: the map is not surrounded by walls\n");
+			error(NULL, "Error: the map is not surrounded by walls\n", 0);
 		}
 		i++;
 	}
@@ -81,7 +81,7 @@ static void	validate_top(t_cub *cub)
 		if (map[i][j] != '1')
 		{
 			free_matriz(cub->i_map.map);
-			error("Error: the map is not surrounded by walls\n");
+			error(NULL, "Error: the map is not surrounded by walls\n", 0);
 		}
 		j++;
 	}
@@ -104,7 +104,7 @@ static void	validate_bottom(t_cub *cub)
 		if (map[i][j] != '1')
 		{
 			free_matriz(cub->i_map.map);
-			error("Error: the map is not surrounded by walls\n");
+			error(NULL, "Error: the map is not surrounded by walls\n", 0);
 		}
 		j++;
 	}

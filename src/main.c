@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	t_cub	cub;
 
 	if (ac != 2)
-		error("Error: cub3D only accepts one parameter\n");
+		error(NULL, "Error: cub3D only accepts one parameter\n", 0);
 	validate_cub(&cub, av[1]);
 	validate_map(&cub);
 	fill_struct(&cub, av[1]);

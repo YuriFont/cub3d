@@ -48,15 +48,20 @@ typedef struct s_win
 
 typedef struct s_img
 {
-	
+	void	*img_ptr;
+    char	*img_data;
+    int		bpp;
+    int		line_len;
+    int		endian;
 }	t_img;
 
 typedef struct s_cub
 {
 	int		fd_cub;
-	t_tex	tex;
+	t_tex	i_tex;
 	t_map	i_map;
 	t_win	i_win;
+	t_img	i_img;
 	void	*ptr_mlx;
 	void	*w_mlx;
 }	t_cub;
@@ -64,7 +69,7 @@ typedef struct s_cub
 
 //utils
 //utils.c
-int		error(char *msg);
+int		error(t_cub *cub, char *msg, int flag);
 int		final_free(t_cub *cub);
 void	free_matriz(char **mat);
 //validation
@@ -95,6 +100,7 @@ void    fill_player_info(t_cub *cub);
 void	initializing_window(t_cub *cub);
 void    fill_player_info(t_cub *cub);
 //ray_casting
+void	ray_casting(t_cub *cub);
 
 
 #endif

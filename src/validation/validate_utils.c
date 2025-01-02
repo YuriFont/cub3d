@@ -19,7 +19,7 @@ void	validate_extension_cub(char *file)
 	i = ft_strlen(file);
 	if (i < 5 || file[i - 1] != 'b' || file[i - 2] != 'u'
 		|| file[i - 3] != 'c' || file[i - 4] != '.')
-		error("Error: the file must have a .cub extension\n");
+		error(NULL, "Error: the file must have a .cub extension\n", 0);
 }
 
 int	validate_extension_xpm(char *file)

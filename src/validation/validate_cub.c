@@ -19,20 +19,20 @@ void	validate_tex(t_cub *cub, char *cp)
 	int		fd_v;
 
 	line = get_next_line(cub->fd_cub);
-	if (!line || ft_strlen(line) < 10 || ft_strncmp(line, cp, 2))
+	if (!line || ft_strlen(line) < 7 || ft_strncmp(line, cp, 2))
 	{
 		free(line);
 		close(cub->fd_cub);
-		error("Error: misconfiguration in textures\n");
+		error(NULL, "Error: misconfiguration in textures\n", 0);
 	}
 	path = ft_substr(line, 3, ft_strlen(line) - 4);
-	if ((fd_v = open(path, O_RDONLY)) == -1 || validate_extension_xpm(path))
+	if (validate_extension_xpm(path) || ((fd_v = open(path, O_RDONLY)) == -1))
 	{
 		close(fd_v);
 		free(path);
 		free(line);
 		close(cub->fd_cub);
-		error("Error: misconfiguration in textures\n");
+		error(NULL, "Error: misconfiguration in textures\n", 0);
 	}
 	close(fd_v);
 	free(path);
@@ -52,7 +52,7 @@ void	validate_rgb(t_cub *cub, char *fc)
 	{
 		free(line);
 		close(cub->fd_cub);
-		error("Error: misconfiguration in floor or ceiling\n");
+		error(NULL, "Error: misconfiguration in floor or ceiling\n", 0);
 	}
 	temp = ft_substr(line, 2, ft_strlen(line) - 3);
 	n = ft_split(temp, ',');
