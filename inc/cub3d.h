@@ -36,8 +36,6 @@ typedef	struct s_map
 	char	**map;
 	int		height;
 	int		width;
-	double	x_player;
-	double	y_player;
 }	t_map;
 
 typedef struct s_win
@@ -55,6 +53,14 @@ typedef struct s_img
     int		endian;
 }	t_img;
 
+typedef struct s_p
+{
+	double	pos_x;
+	double	pos_y;
+	double	dir[2];
+	double	plane[2];
+}	t_p;
+
 typedef struct s_cub
 {
 	int		fd_cub;
@@ -62,6 +68,7 @@ typedef struct s_cub
 	t_map	i_map;
 	t_win	i_win;
 	t_img	i_img;
+	t_p		i_p;
 	void	*ptr_mlx;
 	void	*w_mlx;
 }	t_cub;
@@ -99,8 +106,8 @@ void    fill_player_info(t_cub *cub);
 //init_window.c
 void	initializing_window(t_cub *cub);
 void    fill_player_info(t_cub *cub);
-//ray_casting
-void	ray_casting(t_cub *cub);
+//create_vision.c
+void	create_vision(t_cub *cub);
 
 
 #endif

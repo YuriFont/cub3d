@@ -42,12 +42,11 @@ void put_pixel(t_cub *cub, int x, int y, int color)
     cub->i_img.img_data[pixel + 2] = (color >> 16) & 0xFF;  // Canal vermelho
 }
 
-void	ray_casting(t_cub *cub)
+void    create_background(t_cub *cub)
 {
-	int	c1;
+    int	c1;
 	int	c2;
 
-	create_img(cub);
 	c1 = create_color(cub->i_tex.cc[0], cub->i_tex.cc[1], cub->i_tex.cc[2]);
 	c2 = create_color(cub->i_tex.cf[0], cub->i_tex.cf[1], cub->i_tex.cf[2]);
 	for (int y = 0; y < cub->i_win.w_height; y++)
@@ -60,6 +59,12 @@ void	ray_casting(t_cub *cub)
                 put_pixel(cub, x, y, c2);
         }
     }
+}
+
+void	create_vision(t_cub *cub)
+{
+	create_img(cub);
+    create_background(cub);
     // Exibindo a imagem na janela
     mlx_put_image_to_window(cub->ptr_mlx, cub->w_mlx, cub->i_img.img_ptr, 0, 0);
 }
