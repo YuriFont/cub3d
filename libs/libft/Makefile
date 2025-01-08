@@ -57,7 +57,7 @@ SRCS =	ft_isalpha.c\
 
 OBJS = $(SRCS:.c=.o)
 
-CC = cc
+CC = gcc -g
 
 RM = rm -f
 

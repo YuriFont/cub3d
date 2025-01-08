@@ -14,6 +14,7 @@
 
 void	destroy_window(t_cub *cub)
 {
+	mlx_destroy_image(cub->ptr_mlx, cub->i_img.img_ptr);
 	mlx_destroy_window(cub->ptr_mlx, cub->w_mlx);
 	mlx_destroy_display(cub->ptr_mlx);
 	free(cub->ptr_mlx);

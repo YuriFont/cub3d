@@ -92,5 +92,11 @@ void	fill_struct(t_cub *cub, char *file)
 	fill_textures(cub);
 	fill_colors(cub);
 	fill_player_info(cub);
+	line = get_next_line(cub->fd_cub);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(cub->fd_cub);
+	}
 	close(cub->fd_cub);
 }

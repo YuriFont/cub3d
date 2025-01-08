@@ -30,7 +30,7 @@ LIBMLX = ./libs/minilibx-linux/
 
 LIBMLX_A = $(LIBMLX)libmlx_Linux.a
 
-CC = cc
+CC = gcc -g
 
 FLAGS = -Wall -Wextra -Werror
 
