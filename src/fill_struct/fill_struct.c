@@ -93,6 +93,7 @@ void	fill_struct(t_cub *cub, char *file)
 	fill_colors(cub);
 	fill_player_info(cub);
 	line = get_next_line(cub->fd_cub);
+	cub->i_img.img_ptr = NULL;
 	while (line)
 	{
 		free(line);

@@ -47,7 +47,7 @@ $(LIBMLX_A):
 			$(MAKE) -C $(LIBMLX)
 
 $(NAME): $(LIBFT_A) $(LIBMLX_A)
-			$(CC) $(CFLAGS) $(addprefix ./src/, $(FILES)) $(LIBFT_A) $(LIBMLX_A) $(MLXFLAGS) -o $(NAME)
+			$(CC) $(CFLAGS) $(addprefix ./src/, $(FILES)) $(LIBFT_A) $(LIBMLX_A) $(MLXFLAGS) -o $(NAME)  -lm
 
 clean:
 			$(MAKE) clean -C $(LIBFT)

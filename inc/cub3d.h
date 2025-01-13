@@ -18,8 +18,15 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "../libs/libft/libft.h"
 # include "../libs/minilibx-linux/mlx.h"
+
+# define HEIGHT 480
+# define WIDTH 640
+# define ROTSPEED 0.025
+# define MOVSPEED 0.045
 
 typedef	struct s_tex
 {
@@ -47,7 +54,7 @@ typedef struct s_win
 typedef struct s_img
 {
 	void	*img_ptr;
-    char	*img_data;
+    int		*img_data;
     int		bpp;
     int		line_len;
     int		endian;
@@ -108,6 +115,7 @@ void	initializing_window(t_cub *cub);
 void    fill_player_info(t_cub *cub);
 //create_vision.c
 void	create_vision(t_cub *cub);
+void	create_img(t_cub *cub);
 
 
 #endif
