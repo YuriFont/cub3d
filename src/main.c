@@ -43,25 +43,25 @@ int	on_keypress(int key, t_cub *cub)
 	}
 	if (key == XK_Up) {
 		// Verificação do movimento na direção X
-		if (cub->i_map.map[(int)cub->i_p.pos_y][(int)(cub->i_p.pos_x + cub->i_p.dir[0] * MOVSPEED)] == '0') {
+		if (cub->i_map.map[(int)cub->i_p.pos_y][(int)(cub->i_p.pos_x + cub->i_p.dir[0] * (MOVSPEED * 5))] == '0') {
 			cub->i_p.pos_x += cub->i_p.dir[0] * MOVSPEED;
 			// printf("x> %f\n", cub->i_p.pos_x);
 		}
 		
 		// Verificação do movimento na direção Y
-		if (cub->i_map.map[(int)(cub->i_p.pos_y + cub->i_p.dir[1] * MOVSPEED)][(int)cub->i_p.pos_x] == '0') {
+		if (cub->i_map.map[(int)(cub->i_p.pos_y + cub->i_p.dir[1] * (MOVSPEED * 5))][(int)cub->i_p.pos_x] == '0') {
 			cub->i_p.pos_y += cub->i_p.dir[1] * MOVSPEED;
 			// printf("y> %f\n", cub->i_p.pos_y);
 		}
 	}
 	if (key == XK_Down) {
-		if (cub->i_map.map[(int)cub->i_p.pos_y][(int)(cub->i_p.pos_x - cub->i_p.dir[0] * MOVSPEED)] == '0') {
+		if (cub->i_map.map[(int)cub->i_p.pos_y][(int)(cub->i_p.pos_x - cub->i_p.dir[0] * (MOVSPEED * 5))] == '0') {
 			cub->i_p.pos_x -= cub->i_p.dir[0] * MOVSPEED;
 			// printf("x> %f\n", cub->i_p.pos_x);
 		}
 		
 		// Verificação do movimento na direção Y
-		if (cub->i_map.map[(int)(cub->i_p.pos_y - cub->i_p.dir[1] * MOVSPEED)][(int)cub->i_p.pos_x] == '0') {
+		if (cub->i_map.map[(int)(cub->i_p.pos_y - cub->i_p.dir[1] * (MOVSPEED * 5))][(int)cub->i_p.pos_x] == '0') {
 			cub->i_p.pos_y -= cub->i_p.dir[1] * MOVSPEED;
 			// printf("y> %f\n", cub->i_p.pos_y);
 		}

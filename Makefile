@@ -13,7 +13,9 @@ UTILS = utils.c
 
 INIT_WIN = init_window.c
 
-CREATE_VISION = create_vision.c
+CREATE_VISION = create_vision.c\
+				raycasting.c\
+				render.c
 
 FILES = main.c\
 		$(addprefix utils/, $(UTILS))\
