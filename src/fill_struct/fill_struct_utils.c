@@ -14,15 +14,25 @@
 
 void	fill_vector_plane(t_cub *cub, char d)
 {
-	if (d == 'N' || d == 'S')
+	if (d == 'S')
+	{
+		cub->i_p.plane[0] = -0.66;
+		cub->i_p.plane[1] = 0;
+	}
+	else if (d == 'N')
 	{
 		cub->i_p.plane[0] = 0.66;
 		cub->i_p.plane[1] = 0;
 	}
-	else
+	else if (d == 'E')
 	{
 		cub->i_p.plane[0] = 0;
 		cub->i_p.plane[1] = 0.66;
+	}
+	else
+	{
+		cub->i_p.plane[0] = 0;
+		cub->i_p.plane[1] = -0.66;
 	}
 }
 
@@ -31,12 +41,12 @@ void	fill_player_dir(t_cub *cub, char d)
 	if (d == 'N')
 	{
 		cub->i_p.dir[0] = 0;
-		cub->i_p.dir[1] = 1;
+		cub->i_p.dir[1] = -1;
 	}
 	else if (d == 'S')
 	{
 		cub->i_p.dir[0] = 0;
-		cub->i_p.dir[1] = -1;
+		cub->i_p.dir[1] = 1;
 	}
 	else if (d == 'E')
 	{

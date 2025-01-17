@@ -25,7 +25,7 @@ int	on_keypress(int key, t_cub *cub)
 {
 	if (key == XK_Escape)
 		final_free(cub);
-	if (key == XK_Left){
+	if (key == XK_Right){
 		double oldDir = cub->i_p.dir[0];
 		cub->i_p.dir[0] =  cub->i_p.dir[0] * cos(ROTSPEED) - cub->i_p.dir[1] * sin(ROTSPEED);
 		cub->i_p.dir[1] = oldDir * sin(ROTSPEED) + cub->i_p.dir[1] * cos(ROTSPEED);
@@ -33,7 +33,7 @@ int	on_keypress(int key, t_cub *cub)
 		cub->i_p.plane[0] = cub->i_p.plane[0] * cos(ROTSPEED) - cub->i_p.plane[1] * sin(ROTSPEED);
 		cub->i_p.plane[1] = oldPlaneX * sin(ROTSPEED) + cub->i_p.plane[1] * cos(ROTSPEED);
 	}
-	else if (key == XK_Right) {
+	else if (key == XK_Left) {
 		double oldDir = cub->i_p.dir[0];
 		cub->i_p.dir[0] =  cub->i_p.dir[0] * cos(-ROTSPEED) - cub->i_p.dir[1] * sin(-ROTSPEED);
 		cub->i_p.dir[1] = oldDir * sin(-ROTSPEED) + cub->i_p.dir[1] * cos(-ROTSPEED);

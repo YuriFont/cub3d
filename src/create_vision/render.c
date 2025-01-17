@@ -29,10 +29,19 @@ void	draw_line(t_cub *cub, t_rayInfo *infos, int x)
 			cub->i_img.img_data[index] = 0x228B22;
 		else
 		{
-			if (infos->side == 1)
-				cub->i_img.img_data[index] = 0xAAAAAA;
-			else
-				cub->i_img.img_data[index] = 0x0000FF00 >> 8;
+			if (infos->side == 0) { // Parede no eixo X
+    				if (infos->step_x > 0) {
+        				cub->i_img.img_data[index] = 0x0000FF; // Parede voltada para o leste VERMELHO
+    				} else {
+        				cub->i_img.img_data[index] = 0x00FF00; // Parede voltada para o oeste VERDE
+    				}
+				} else { // Parede no eixo Y
+    				if (infos->step_y > 0) {
+        				cub->i_img.img_data[index] = 0xFF0000; // Parede voltada para o sul AZUL
+    				} else {
+        				cub->i_img.img_data[index] = 0xFFFF00; // Parede voltada para o norte AMARELO
+    				}
+				}
 		}
 	}
 }
