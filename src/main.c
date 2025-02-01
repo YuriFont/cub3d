@@ -66,7 +66,22 @@ int	on_keypress(int key, t_cub *cub)
 			// printf("y> %f\n", cub->i_p.pos_y);
 		}
 	}
-
+	if (key == 'a') {
+		if (cub->i_map.map[(int)(cub->i_p.pos_y)][(int)(cub->i_p.pos_x - cub->i_p.plane[0] * (MOVSPEED * 2))] == '0') {
+			cub->i_p.pos_x -= cub->i_p.plane[0] * MOVSPEED;
+		}
+		if (cub->i_map.map[(int)(cub->i_p.pos_y - cub->i_p.plane[1] * (MOVSPEED * 2))][(int)cub->i_p.pos_x] == '0') {
+			cub->i_p.pos_y -= cub->i_p.plane[1] * MOVSPEED;
+		}
+	}
+	if (key == 'd') {
+		if (cub->i_map.map[(int)(cub->i_p.pos_y)][(int)(cub->i_p.pos_x + cub->i_p.plane[0] * (MOVSPEED * 2))] == '0') {
+			cub->i_p.pos_x += cub->i_p.plane[0] * MOVSPEED;
+		}
+		if (cub->i_map.map[(int)(cub->i_p.pos_y + cub->i_p.plane[1] * (MOVSPEED * 2))][(int)(cub->i_p.pos_x)] == '0') {
+			cub->i_p.pos_y += cub->i_p.plane[1] * MOVSPEED;
+		}
+	}
 	create_vision(cub);
 	return (0);
 }

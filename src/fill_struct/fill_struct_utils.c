@@ -77,8 +77,8 @@ void    fill_player_info(t_cub *cub)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				cub->i_p.pos_y = (double)i;
-				cub->i_p.pos_x = (double)j;
+				cub->i_p.pos_y = (double)i + 0.5;
+				cub->i_p.pos_x = (double)j + 0.5;
 				fill_player_dir(cub, map[i][j]);
 				map[i][j] = '0';
 				printf("POSIÇÕES DO JOGADOR\npos_x: %lf, pos_y: %lf, dir - X: %lf Y: %lf\n", cub->i_p.pos_x, cub->i_p.pos_y, cub->i_p.dir[0], cub->i_p.dir[1]);
