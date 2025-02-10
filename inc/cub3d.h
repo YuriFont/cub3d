@@ -26,10 +26,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define HEIGHT 480
-# define WIDTH 640
-# define ROTSPEED 0.025
-# define MOVSPEED 0.045
+// # define HEIGHT 480
+// # define WIDTH 640
+# define HEIGHT 600
+# define WIDTH 800
+# define ROTSPEED 0.05
+# define MOVSPEED 0.10
 
 typedef struct s_tex
 {
@@ -56,11 +58,13 @@ typedef struct s_win
 
 typedef struct s_img
 {
-	void	*img_ptr;
-	int		*img_data;
-	int		bpp;
-	int		line_len;
-	int		endian;
+	void			*img_ptr;
+	unsigned char	*img_data;
+	int				bpp;
+	int				line_len;
+	int				endian;
+	int				width;
+	int				height;
 }			t_img;
 
 typedef struct s_p
@@ -78,7 +82,11 @@ typedef struct s_cub
 	t_map	i_map;
 	t_win	i_win;
 	t_img	i_img;
-	t_p		i_p;
+	t_img	tex_north;
+	t_img	tex_south;
+	t_img	tex_east;
+	t_img	tex_west;
+	t_p			i_p;
 	void	*ptr_mlx;
 	void	*w_mlx;
 }			t_cub;
@@ -100,6 +108,7 @@ typedef struct s_rayInfo
 	int		side;			// Indica se o impacto foi em X (0) ou Y (1)
 	int		wall_start;
 	int		wall_end;
+	int		line_height;
 }			t_rayInfo;
 
 // utils

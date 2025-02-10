@@ -19,9 +19,11 @@
 void	create_img(t_cub *cub)
 {
 	cub->i_img.img_ptr = mlx_new_image(cub->ptr_mlx, WIDTH, HEIGHT);
+	cub->i_img.width = WIDTH;
+	cub->i_img.height = HEIGHT;
 	if (cub->i_img.img_ptr == NULL)
 		error(cub, "Error: cannot create image\n", 1);
-	cub->i_img.img_data = (int *)mlx_get_data_addr(cub->i_img.img_ptr,
+	cub->i_img.img_data = (unsigned char *)mlx_get_data_addr(cub->i_img.img_ptr,
 			&cub->i_img.bpp, &cub->i_img.line_len, &cub->i_img.endian);
 	if (cub->i_img.img_data == NULL)
 		error(cub, "Error: cannot get data of image\n", 1);

@@ -41,7 +41,7 @@ int	on_keypress(int key, t_cub *cub)
 		cub->i_p.plane[0] = cub->i_p.plane[0] * cos(-ROTSPEED) - cub->i_p.plane[1] * sin(-ROTSPEED);
 		cub->i_p.plane[1] = oldPlaneX * sin(-ROTSPEED) + cub->i_p.plane[1] * cos(-ROTSPEED);
 	}
-	if (key == XK_Up) {
+	if (key == XK_Up || key == XK_w) {
 		// Verificação do movimento na direção X
 		if (cub->i_map.map[(int)cub->i_p.pos_y][(int)(cub->i_p.pos_x + cub->i_p.dir[0] * (MOVSPEED * 5))] == '0') {
 			cub->i_p.pos_x += cub->i_p.dir[0] * MOVSPEED;
@@ -54,7 +54,7 @@ int	on_keypress(int key, t_cub *cub)
 			// printf("y> %f\n", cub->i_p.pos_y);
 		}
 	}
-	if (key == XK_Down) {
+	if (key == XK_Down || key == XK_s) {
 		if (cub->i_map.map[(int)cub->i_p.pos_y][(int)(cub->i_p.pos_x - cub->i_p.dir[0] * (MOVSPEED * 5))] == '0') {
 			cub->i_p.pos_x -= cub->i_p.dir[0] * MOVSPEED;
 			// printf("x> %f\n", cub->i_p.pos_x);
@@ -66,7 +66,7 @@ int	on_keypress(int key, t_cub *cub)
 			// printf("y> %f\n", cub->i_p.pos_y);
 		}
 	}
-	if (key == 'a') {
+	if (key == XK_a) {
 		if (cub->i_map.map[(int)(cub->i_p.pos_y)][(int)(cub->i_p.pos_x - cub->i_p.plane[0] * (MOVSPEED * 2))] == '0') {
 			cub->i_p.pos_x -= cub->i_p.plane[0] * MOVSPEED;
 		}
@@ -74,7 +74,7 @@ int	on_keypress(int key, t_cub *cub)
 			cub->i_p.pos_y -= cub->i_p.plane[1] * MOVSPEED;
 		}
 	}
-	if (key == 'd') {
+	if (key == XK_d) {
 		if (cub->i_map.map[(int)(cub->i_p.pos_y)][(int)(cub->i_p.pos_x + cub->i_p.plane[0] * (MOVSPEED * 2))] == '0') {
 			cub->i_p.pos_x += cub->i_p.plane[0] * MOVSPEED;
 		}
@@ -83,6 +83,23 @@ int	on_keypress(int key, t_cub *cub)
 		}
 	}
 	create_vision(cub);
+	return (0);
+}
+
+void	load_image_texture(t_cub *cub, t_img *texture, char *path)
+{
+	texture->img_ptr = mlx_xpm_file_to_image(cub->ptr_mlx, path, &texture->width, &texture->height);
+	if (!texture->img_ptr)
+		error(cub, "Error: cannot load texture image\n", 1);	
+	texture->img_data = (unsigned char *)mlx_get_data_addr(texture->img_ptr, &texture->bpp, &texture->line_len, &texture->endian);
+	// printf("%d   %d\n", texture->line_len, texture->bpp);
+}
+
+int run_code(t_cub *cub)
+{
+	create_vision(cub);
+	mlx_put_image_to_window(cub->ptr_mlx, cub->w_mlx, cub->i_img.img_ptr, 0,
+		0);
 	return (0);
 }
 
@@ -98,10 +115,15 @@ int	main(int ac, char **av)
 	for (int i = 0; cub.i_map.map[i] != 0; i++)
 		printf("%s\n", cub.i_map.map[i]);
 	initializing_window(&cub);
+	load_image_texture(&cub, &cub.tex_east, cub.i_tex.so);
+	load_image_texture(&cub, &cub.tex_west, cub.i_tex.we);
+	load_image_texture(&cub, &cub.tex_north, cub.i_tex.no);
+	load_image_texture(&cub, &cub.tex_south, cub.i_tex.ea);
 	create_img(&cub);
+	mlx_hook(cub.w_mlx, KeyPress, KeyPressMask, &on_keypress, &cub);
+	// mlx_loop_hook(cub.ptr_mlx, run_code, &cub);
 	create_vision(&cub);
 	mlx_hook(cub.w_mlx, 17, 0, final_free, &cub);
-	mlx_hook(cub.w_mlx, KeyPress, KeyPressMask, &on_keypress, &cub);
 	// mlx_loop_hook(cub.ptr_mlx, get_mouse_pos, &cub);
 	mlx_loop(cub.ptr_mlx);
 	return (0);
