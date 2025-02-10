@@ -89,7 +89,7 @@ void	create_vision(t_cub *cub)
 	// create_background(cub);
 	create_dda_vision(cub);
 	// Exibindo a imagem na janela
-	mlx_put_image_to_window(cub->ptr_mlx, cub->w_mlx, cub->i_img.img_ptr, 0,
-		0);
+	// mlx_put_image_to_window(cub->ptr_mlx, cub->w_mlx, cub->i_img.img_ptr, 0,
+	// 	0);
 	// mlx_destroy_image(cub->ptr_mlx, cub->i_img.img_ptr);
 }

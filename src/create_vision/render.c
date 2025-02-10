@@ -58,8 +58,8 @@ int get_texture_color(t_img *texture, int tex_x, int tex_y)
 
 t_img *select_texture(t_cub *cub, t_rayInfo *infos)
 {
-    if (infos->side == 0)
-    {
+	if (infos->side == 0)
+	{
         if (infos->ray_dir_x > 0)
             return &cub->tex_east;
         else

@@ -30,8 +30,8 @@
 // # define WIDTH 640
 # define HEIGHT 600
 # define WIDTH 800
-# define ROTSPEED 0.05
-# define MOVSPEED 0.10
+# define ROTSPEED 0.03
+# define MOVSPEED 0.05
 
 typedef struct s_tex
 {
@@ -55,6 +55,16 @@ typedef struct s_win
 	int		w_width;
 	int		w_height;
 }			t_win;
+
+typedef struct s_move
+{
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		rot_left;
+	int		rot_right;
+}			t_move;
 
 typedef struct s_img
 {
@@ -86,7 +96,8 @@ typedef struct s_cub
 	t_img	tex_south;
 	t_img	tex_east;
 	t_img	tex_west;
-	t_p			i_p;
+	t_p		i_p;
+	t_move	move;
 	void	*ptr_mlx;
 	void	*w_mlx;
 }			t_cub;
