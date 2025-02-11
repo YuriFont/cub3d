@@ -84,6 +84,16 @@ void	fill_map(t_cub *cub)
 	free(holder_map);
 }
 
+void	default_values_moves(t_cub *cub)
+{
+	cub->move.up = 0;
+	cub->move.down = 0;
+	cub->move.left = 0;
+	cub->move.right = 0;
+	cub->move.rot_left = 0;
+	cub->move.rot_right = 0;
+}
+
 void	fill_struct(t_cub *cub, char *file)
 {
 	char	*line;
@@ -100,4 +110,5 @@ void	fill_struct(t_cub *cub, char *file)
 		line = get_next_line(cub->fd_cub);
 	}
 	close(cub->fd_cub);
+	default_values_moves(cub);
 }

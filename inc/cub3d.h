@@ -96,6 +96,7 @@ typedef struct s_cub
 	t_img	tex_south;
 	t_img	tex_east;
 	t_img	tex_west;
+	t_img	frames[10];
 	t_p		i_p;
 	t_move	move;
 	void	*ptr_mlx;
@@ -120,6 +121,7 @@ typedef struct s_rayInfo
 	int		wall_start;
 	int		wall_end;
 	int		line_height;
+	double	wall_x;
 }			t_rayInfo;
 
 // utils
@@ -167,5 +169,23 @@ int			find_wall(t_cub *cub, t_rayInfo *infos);
 int			calculate_perpendicular(t_cub *cub, t_rayInfo *infos);
 int			calculate_wall_height(t_rayInfo *infos);
 void		draw_line(t_cub *cub, t_rayInfo *infos, int x);
+
+// key_handles.c
+int			on_keypress(int key, t_cub *cub);
+int			on_keyrelease(int key, t_cub *cub);
+int			move_player(t_cub *cub);
+// move_handles.c
+int			move_left(t_cub *cub);
+int			move_right(t_cub *cub);
+int			move_forward(t_cub *cub);
+int			move_backward(t_cub *cub);
+int			rotate_right(t_cub *cub);
+int			rotate_left(t_cub *cub);
+int			get_mouse_pos(void *ptr);
+// loop_game.c
+int			animation_wall(t_cub *cub);
+int			run_code(t_cub *cub);
+// test.c
+int			copy_frame(t_img *dest, t_img *source);
 
 #endif

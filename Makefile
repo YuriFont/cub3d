@@ -22,7 +22,11 @@ FILES = main.c\
 		$(addprefix validation/, $(VALIDATION))\
 		$(addprefix fill_struct/, $(FILL_STRUCT))\
 		$(addprefix window/, $(INIT_WIN))\
-		$(addprefix create_vision/, $(CREATE_VISION))
+		$(addprefix create_vision/, $(CREATE_VISION))\
+		key_handles.c\
+		move_handles.c\
+		loop_game.c\
+		test.c\
 
 LIBFT = ./libs/libft/
 

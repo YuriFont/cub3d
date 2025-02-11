@@ -56,22 +56,78 @@ int get_texture_color(t_img *texture, int tex_x, int tex_y)
     return blended_color;
 }
 
-t_img *select_texture(t_cub *cub, t_rayInfo *infos)
+t_img	*select_texture(t_cub *cub, t_rayInfo *infos)
 {
 	if (infos->side == 0)
 	{
-        if (infos->ray_dir_x > 0)
-            return &cub->tex_east;
-        else
-            return &cub->tex_west;
-    }
-    else
-    {
-        if (infos->ray_dir_y > 0)
-            return &cub->tex_north;
-        else
-            return &cub->tex_south;
-    }
+		if (infos->ray_dir_x > 0)
+			return (&cub->tex_east);
+		else
+			return (&cub->tex_west);
+	}
+	else
+	{
+		if (infos->ray_dir_y > 0)
+			return (&cub->tex_north);
+		else
+			return (&cub->tex_south);
+	}
+}
+
+int	draw_sky(int *pixels, int x, t_rayInfo *infos)
+{
+	int	y;
+
+	y = -1;
+	while (y++ < infos->wall_start)
+		pixels[y * WIDTH + x] = 0x87CEEB;
+	return (1);
+}
+
+int	draw_floor(int *pixels, int x, t_rayInfo *infos)
+{
+	int	y;
+
+	y = infos->wall_end - 1;
+	while (y++ < HEIGHT)
+		pixels[y * WIDTH + x] = 0x228B22;
+	return (1);
+}
+
+int get_texture_pos_x(t_rayInfo *infos, t_img *texture)
+{
+	int	tex_x;
+
+	tex_x = (infos->wall_x * (double)texture->width);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= texture->width)
+		tex_x = texture->width - 1;
+	return (tex_x);
+}
+
+int get_texture_pos_y(t_rayInfo *infos, t_img *texture, double tex_pos)
+{
+	int	tex_y;
+
+	tex_y = (int)tex_pos;
+	if (tex_y < 0)
+		tex_y = 0;
+	if (tex_y >= texture->height)
+		tex_y = ((int)tex_pos) & (texture->height - 1);
+	return (tex_y);
+}
+
+int	get_ray_hit_wall_x(t_cub *cub, t_rayInfo *infos)
+{
+	if (infos->side == 0)
+		infos->wall_x = cub->i_p.pos_y + infos->perp_wall_dist
+			* infos->ray_dir_y;
+	else
+		infos->wall_x = cub->i_p.pos_x + infos->perp_wall_dist
+			* infos->ray_dir_x;
+	infos->wall_x -= floor(infos->wall_x);
+	return (1);
 }
 
 void	draw_line(t_cub *cub, t_rayInfo *infos, int x)
@@ -84,119 +140,37 @@ void	draw_line(t_cub *cub, t_rayInfo *infos, int x)
 	double	tex_x;
 	int		tex_y;
 	int		color;
+	int 	y;
 
 	pixels = (int *)cub->i_img.img_data;
 	texture = select_texture(cub, infos);
 
 
 	// LOCAL ONDE O RAIO ATINGE A PAREDE
-	if (infos->side == 0)
-		wall_x = cub->i_p.pos_y + infos->perp_wall_dist * infos->ray_dir_y;
-	else
-		wall_x = cub->i_p.pos_x + infos->perp_wall_dist * infos->ray_dir_x;
-	wall_x -= floor(wall_x);
+	get_ray_hit_wall_x(cub, infos);
 
 	// COORDENADA X DA TEXTURA
-	tex_x = (wall_x * (double)texture->width);
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= texture->width)
-		tex_x = texture->width - 1;
+	tex_x = get_texture_pos_x(infos, texture);
 
 	step = 1.0 * texture->height / infos->line_height;
 	tex_pos = (infos->wall_start - HEIGHT / 2 + infos->line_height / 2) * step;
 
 
-	for (int y = 0; y < infos->wall_start; y++)
-		pixels[y * WIDTH + x] = 0x87CEEB; // Céu
-	for (int y = infos->wall_end; y < HEIGHT; y++)
-		pixels[y * WIDTH + x] = 0x228B22; // Chão
+	draw_sky(pixels, x, infos);
+	draw_floor(pixels, x, infos);
 
-
-	for (int y = infos->wall_start; y < infos->wall_end; y++)
+	y = infos->wall_start;
+	while (y < infos->wall_end)
 	{
-		// Cálculo do índice do pixel
-		int index = y * WIDTH + x;
-
-		tex_y = (int)tex_pos;
-    	if (tex_y < 0)
-			tex_y = 0;
-    	if (tex_y >= texture->height)
-			tex_y = ((int)tex_pos) & (texture->height - 1);
+		tex_y = get_texture_pos_y(infos, texture, tex_pos);
 
 		color = get_texture_color(texture, tex_x, tex_y);
 
 		if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH)
-    		pixels[index] = color;
+    		pixels[y * WIDTH + x] = color;
 		tex_pos += step;
+		y++;
 	}
 	pixels[infos->wall_start * WIDTH + x] = get_texture_color(&cub->i_img, x, infos->wall_start);
 	pixels[infos->wall_end * WIDTH + x] = get_texture_color(&cub->i_img, x, infos->wall_end);
 }
-
-// void draw_line(t_cub *cub, t_rayInfo *infos, int x)
-// {
-//     int *pixels = (int *)cub->i_img.img_data;
-
-// 	t_img *texture = select_texture(cub, infos);
-
-//     // Cálculo de `wall_x` (posição exata de impacto na parede)
-//     double wall_x;
-//     if (infos->side == 0) // Parede no eixo X
-//         wall_x = cub->i_p.pos_y + infos->perp_wall_dist * infos->ray_dir_y;
-//     else                  // Parede no eixo Y
-//         wall_x = cub->i_p.pos_x + infos->perp_wall_dist * infos->ray_dir_x;
-//     wall_x -= floor(wall_x);
-
-//     // Coordenada X da textura
-//     double tex_x = wall_x * (double)texture->width;
-//     if ((infos->side == 0 && infos->ray_dir_x > 0) || (infos->side == 1 && infos->ray_dir_y < 0))
-//         tex_x = texture->width - tex_x - 1;
-
-//     // Altura da linha
-//     int line_height = (int)(HEIGHT / infos->perp_wall_dist);
-
-//     // Posições de início e fim da linha na tela
-//     int draw_start = -line_height / 2 + HEIGHT / 2;
-//     if (draw_start < 0)
-//         draw_start = 0;
-//     int draw_end = line_height / 2 + HEIGHT / 2;
-//     if (draw_end >= HEIGHT)
-//         draw_end = HEIGHT - 1;
-
-
-//     // Configurar step (avanço por pixel na textura)
-//     double step = (double)texture->height / (double)line_height;
-
-//     // Posição inicial da textura
-//     double tex_pos = (infos->wall_start - HEIGHT / 2 + line_height / 2) * step;
-
-//     // Desenho da linha da parede
-//     for (int y = draw_start; y <= draw_end; y++)
-//     {
-//         // Coordenada Y da textura
-// 		int tex_y = (int)tex_pos;
-// 		if (tex_y >= texture->height)
-// 			tex_y = (infos->wall_start - HEIGHT / 2 + line_height / 2) * step;
-// 		else if (tex_y < 0)
-// 			tex_y = 0;
-//         tex_pos += step;
-
-//         // Cor do pixel na textura
-//         int color = get_texture_color(texture, tex_x, tex_y);
-
-//         // Aplicar pixel na imagem (verificando limites da tela)
-//         if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH)
-//             pixels[y * WIDTH + x] = color;
-//     }
-
-//     // Preencher o céu acima da parede
-//     for (int y = 0; y < draw_start; y++)
-//         pixels[y * WIDTH + x] = 0x87CEEB; // Azul claro (cor do céu)
-
-//     // Preencher o chão abaixo da parede
-//     for (int y = draw_end + 1; y < HEIGHT; y++)
-//     {
-//         pixels[y * WIDTH + x] = 0x228B22; // Verde escuro (cor do chão)
-//     }
-// }
