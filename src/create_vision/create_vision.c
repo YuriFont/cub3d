@@ -69,8 +69,10 @@ void	create_background(t_cub *cub)
 int	create_dda_vision(t_cub *cub)
 {
 	t_rayInfo	infos;
+	int			x;
 
-	for (int x = 0; x < WIDTH; x++)
+	x = 0;
+	while (x < WIDTH)
 	{
 		calculate_dir(cub, &infos, x);
 		get_player_position(cub, &infos);
@@ -80,6 +82,7 @@ int	create_dda_vision(t_cub *cub)
 		calculate_perpendicular(cub, &infos);
 		calculate_wall_height(&infos);
 		draw_line(cub, &infos, x);
+		x++;
 	}
 	return (0);
 }

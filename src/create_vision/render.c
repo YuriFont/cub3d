@@ -17,25 +17,27 @@ int	calculate_wall_height(t_rayInfo *infos)
 
 int get_texture_color(t_img *texture, int tex_x, int tex_y)
 {
+	int pixel;
     // Garantir que x e y estão dentro dos limites
-    // if (x < 0) x = 0;
-    // if (x >= texture->width) x = texture->width - 1;
-    // if (y < 0) y = 0;
-    // if (y >= texture->height) y = texture->height - 1;
+    if (tex_x < 0) tex_x = 0;
+    if (tex_x >= texture->width) tex_x = texture->width - 1;
+    if (tex_y < 0) tex_y = 0;
+    if (tex_y >= texture->height) tex_y = texture->height - 1;
 
-    // if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
-    // {
-    //     fprintf(stderr, "Coordenadas fora dos limites da textura: x=%d, y=%d\n", x, y);
-    //     return 0; // Retorne uma cor padrão ou informe o erro
-    // }
-    // // Calcular posição do pixel
-    // int pixel = (y * texture->line_len) + (x * (texture->bpp / 8));
-    // if (pixel < 0 || pixel >= (texture->line_len * texture->height)) {
-    //     fprintf(stderr, "Índice do pixel fora dos limites: pixel=%d\n", pixel);
-    //     return 0; // Retorna cor padrão (preta)
-    // }
-    // return *(int *)(texture->img_data + pixel);
-    int x = (int)tex_x;
+    if (tex_x < 0 || tex_x >= texture->width || tex_y < 0 || tex_y >= texture->height)
+    {
+		
+        printf("Coordenadas fora dos limites da textura: x=%d, y=%d\n", tex_x, tex_y);
+        return 0;
+    }
+    // Calcular posição do pixel
+    pixel = (tex_y * texture->line_len) + (tex_x * (texture->bpp / 8));
+    if (pixel < 0 || pixel >= (texture->line_len * texture->height)) {
+        printf("Índice do pixel fora dos limites\n");
+        return 0;
+    }
+    return *(int *)(texture->img_data + pixel);
+/*     int x = (int)tex_x;
     int y = (int)tex_y;
     
     double dx = tex_x - x;
@@ -54,6 +56,7 @@ int get_texture_color(t_img *texture, int tex_x, int tex_y)
     );
 
     return blended_color;
+	*/
 }
 
 t_img	*select_texture(t_cub *cub, t_rayInfo *infos)

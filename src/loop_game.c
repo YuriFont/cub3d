@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   loop_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erramos <erramos@student.42.rio>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 17:16:46 by erramos           #+#    #+#             */
+/*   Updated: 2025/02/13 17:16:50 by erramos          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 int	animation_wall(t_cub *cub)
@@ -19,7 +31,8 @@ int	animation_wall(t_cub *cub)
 
 int	run_code(t_cub *cub)
 {
-	animation_wall(cub);
+	/* Animação para quando a imagem da parede for um gif */
+/* 	animation_wall(cub); */
 	move_player(cub);
 	create_vision(cub);
 	mlx_put_image_to_window(cub->ptr_mlx, cub->w_mlx, cub->i_img.img_ptr, 0, 0);

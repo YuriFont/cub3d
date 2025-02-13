@@ -61,15 +61,15 @@ void	fill_player_dir(t_cub *cub, char d)
 	fill_vector_plane(cub, d);
 }
 
-void    fill_player_info(t_cub *cub)
+void	fill_player_info(t_cub *cub)
 {
-    int		i;
+	int		i;
 	int		j;
 	char	**map;
 
 	map = cub->i_map.map;
 	i = 0;
-    while (map[i])
+	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
