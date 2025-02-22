@@ -12,7 +12,7 @@
 
 #include "../../inc/cub3d.h"
 
-void initializing_window(t_cub *cub)
+void	initializing_window(t_cub *cub)
 {
 	cub->ptr_mlx = mlx_init();
 	if (!cub->ptr_mlx)
@@ -22,7 +22,7 @@ void initializing_window(t_cub *cub)
 	cub->i_win.w_width = WIDTH;
 	cub->i_win.w_height = HEIGHT;
 	cub->w_mlx = mlx_new_window(cub->ptr_mlx,
-		cub->i_win.w_width, cub->i_win.w_height, "Cub3D");
+			cub->i_win.w_width, cub->i_win.w_height, "Cub3D");
 	if (!cub->w_mlx)
 		error(cub, "Error: cannot init window\n", 1);
 }

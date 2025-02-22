@@ -28,14 +28,13 @@ static void	fill_textures(t_cub *cub)
 	free(line[1]);
 	free(line[2]);
 	free(line[3]);
-	printf("TEXTURES  - \n NO: %s\n SO: %s\n EA: %s\n WE: %s\n", cub->i_tex.no, cub->i_tex.so, cub->i_tex.ea, cub->i_tex.we);
 }
 
 static void	fill_colors(t_cub *cub)
 {
 	char	*line[3];
 	char	**c[2];
-	char 	*linec[2];
+	char	*linec[2];
 	int		i;
 
 	i = 0;
@@ -58,7 +57,6 @@ static void	fill_colors(t_cub *cub)
 	free(linec[1]);
 	free(c[0]);
 	free(c[1]);
-	printf("COLORS\n Ceiling: %d,%d,%d\n Floor: %d,%d,%d\n", cub->i_tex.cc[0], cub->i_tex.cc[1], cub->i_tex.cc[2], cub->i_tex.cf[0], cub->i_tex.cf[1], cub->i_tex.cf[2]);
 }
 
 void	fill_map(t_cub *cub)

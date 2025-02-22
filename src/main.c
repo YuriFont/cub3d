@@ -22,7 +22,7 @@ void	load_image_texture(t_cub *cub, t_img *texture, char *path)
 			&texture->bpp, &texture->line_len, &texture->endian);
 }
 
-int initial_config(t_cub *cub, char *av)
+int	initial_config(t_cub *cub, char *av)
 {
 	validate_cub(cub, av);
 	validate_map(cub);
@@ -40,26 +40,24 @@ int	load_texture(t_cub *cub)
 	return (1);
 }
 
+void	loading_game(t_cub *cub, char *av)
+{
+	initial_config(cub, av);
+	load_texture(cub);
+	create_img(cub);
+}
+
 int	main(int ac, char **av)
 {
 	t_cub	cub;
 
 	if (ac != 2)
 		error(NULL, "Error: cub3D only accepts one parameter\n", 0);
-/* 	validate_cub(&cub, av[1]);
-	validate_map(&cub);
-	fill_struct(&cub, av[1]);
-	initializing_window(&cub); */
-	initial_config(&cub, av[1]);
-	for (int i = 0; cub.i_map.map[i] != 0; i++)
-		printf("%s\n", cub.i_map.map[i]);
-	load_texture(&cub);
-	create_img(&cub);
+	loading_game(&cub, av[1]);
 	mlx_hook(cub.w_mlx, KeyPress, KeyPressMask, &on_keypress, &cub);
 	mlx_hook(cub.w_mlx, KeyRelease, KeyReleaseMask, &on_keyrelease, &cub);
 	mlx_loop_hook(cub.ptr_mlx, run_code, &cub);
 	mlx_hook(cub.w_mlx, 17, 0, final_free, &cub);
-/* 	mlx_loop_hook(cub.ptr_mlx, get_mouse_pos, &cub); */
 	mlx_loop(cub.ptr_mlx);
 	return (0);
 }

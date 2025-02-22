@@ -27,12 +27,10 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-// # define HEIGHT 480
-// # define WIDTH 640
 # define HEIGHT 600
 # define WIDTH 800
-# define ROTSPEED 0.03
-# define MOVSPEED 0.05
+# define ROTSPEED 0.01
+# define MOVSPEED 0.01
 
 typedef struct s_tex
 {
@@ -104,78 +102,70 @@ typedef struct s_cub
 	void	*w_mlx;
 }			t_cub;
 
-typedef struct s_rayInfo
+typedef struct s_ray_info
 {
-	double	camera_x;		// Posição do raio no plano da câmera (-1 a 1)
-	double	ray_dir_x;		// Direção X do raio
-	double	ray_dir_y;		// Direção Y do raio
-	double	delta_dist_x;	// Distância entre cada interseção em X
-	double	delta_dist_y;	// Distância entre cada interseção em Y
-	double	side_dist_x;	// Distância inicial até a primeira interseção em X
-	double	side_dist_y;	// Distância inicial até a primeira interseção em Y
-	double	perp_wall_dist;	// Distância perpendicular até a parede
-	int		map_x;			// Posição X no mapa onde o raio está
-	int		map_y;			// Posição Y no mapa onde o raio está
-	int		step_x;			// Direção do passo em X (-1 ou 1)
-	int		step_y;			// Direção do passo em Y (-1 ou 1)
-	int		side;			// Indica se o impacto foi em X (0) ou Y (1)
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	perp_wall_dist;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
 	int		wall_start;
 	int		wall_end;
 	int		line_height;
 	double	wall_x;
-}			t_rayInfo;
+	double	step;
+	double	tex_pos;
+	double	tex_x;
+}			t_ray_info;
 
-// utils
-// utils.c
 int			error(t_cub *cub, char *msg, int flag);
 int			final_free(t_cub *cub);
 void		free_matriz(char **mat);
-// validation
-// validate_cub.c
 void		validate_cub(t_cub *cub, char *file);
-// validate_utils.c
 void		validate_extension_cub(char *file);
 int			validate_extension_xpm(char *file);
 int			validate_hx(char *num);
 int			size_rgb(char **n);
-// validate_map.c
 void		validate_map(t_cub *cub);
-// validate_map_utils.c
 void		check_character(t_cub *cub, char c);
 void		validate_spaces(t_cub *cub);
 void		validate_unevenness_bot(t_cub *cub);
 void		validate_unevenness_top(t_cub *cub);
-// check_around.c
 int			check_around(char **map, int y, int x, int h);
-// fill_struct
-// fill_struct.c
 void		fill_struct(t_cub *cub, char *file);
 void		fill_map(t_cub *cub);
-// fil_struct_utils.c
 void		fill_player_info(t_cub *cub);
-// window
-// init_window.c
 void		initializing_window(t_cub *cub);
 void		fill_player_info(t_cub *cub);
-// create_vision.c
-void		create_vision(t_cub *cub);
+int			create_dda_vision(t_cub *cub);
 void		create_img(t_cub *cub);
-
-// raycasting.c
-void		calculate_dir(t_cub *cub, t_rayInfo *infos, int x);
-int			get_player_position(t_cub *cub, t_rayInfo *infos);
-int			get_delta_dist_x_and_y(t_rayInfo *infos);
-int			get_side_dist(t_cub *cub, t_rayInfo *infos);
-int			find_wall(t_cub *cub, t_rayInfo *infos);
-int			calculate_perpendicular(t_cub *cub, t_rayInfo *infos);
-int			calculate_wall_height(t_rayInfo *infos);
-void		draw_line(t_cub *cub, t_rayInfo *infos, int x);
-
-// key_handles.c
+int			get_texture_pos_y(t_ray_info *infos, t_img *texture,
+				double tex_pos);
+int			calculate_wall_height(t_ray_info *infos);
+int			get_texture_color(t_img *texture, int tex_x, int tex_y, t_cub *cub);
+t_img		*select_texture(t_cub *cub, t_ray_info *infos);
+int			draw_floor(t_cub *cub, int x, t_ray_info *infos);
+int			draw_sky(t_cub *cub, int x, t_ray_info *infos);
+void		draw_wall(t_cub *cub, int x, t_ray_info *info, t_img *texture);
+void		calculate_dir(t_cub *cub, t_ray_info *infos, int x);
+int			get_player_position(t_cub *cub, t_ray_info *infos);
+int			get_delta_dist_x_and_y(t_ray_info *infos);
+int			get_side_dist(t_cub *cub, t_ray_info *infos);
+int			find_wall(t_cub *cub, t_ray_info *infos);
+int			calculate_perpendicular(t_cub *cub, t_ray_info *infos);
+int			calculate_wall_height(t_ray_info *infos);
+void		draw_line(t_cub *cub, t_ray_info *infos, int x);
 int			on_keypress(int key, t_cub *cub);
 int			on_keyrelease(int key, t_cub *cub);
 int			move_player(t_cub *cub);
-// move_handles.c
 int			move_left(t_cub *cub);
 int			move_right(t_cub *cub);
 int			move_forward(t_cub *cub);
@@ -183,10 +173,7 @@ int			move_backward(t_cub *cub);
 int			rotate_right(t_cub *cub);
 int			rotate_left(t_cub *cub);
 int			get_mouse_pos(void *ptr);
-// loop_game.c
 int			animation_wall(t_cub *cub);
 int			run_code(t_cub *cub);
-// test.c
-int			copy_frame(t_img *dest, t_img *source);
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 int	on_keypress(int key, t_cub *cub)
 {
@@ -28,7 +28,6 @@ int	on_keypress(int key, t_cub *cub)
 		cub->move.left = 1;
 	if (key == XK_d)
 		cub->move.right = 1;
-	create_vision(cub);
 	return (0);
 }
 

@@ -39,7 +39,7 @@ int	final_free(t_cub *cub)
 	free(cub->i_tex.ea);
 	destroy_window(cub);
 	exit(0);
-	return(0);
+	return (0);
 }
 
 int	error(t_cub *cub, char *msg, int flag)

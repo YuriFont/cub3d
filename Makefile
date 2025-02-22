@@ -15,7 +15,13 @@ INIT_WIN = init_window.c
 
 CREATE_VISION = create_vision.c\
 				raycasting.c\
-				render.c
+				render.c\
+				render_utils.c\
+				draw.c
+
+MOVEMENT = key_handles.c\
+		   move_handles.c\
+		   rotate_handles.c
 
 FILES = main.c\
 		$(addprefix utils/, $(UTILS))\
@@ -23,10 +29,8 @@ FILES = main.c\
 		$(addprefix fill_struct/, $(FILL_STRUCT))\
 		$(addprefix window/, $(INIT_WIN))\
 		$(addprefix create_vision/, $(CREATE_VISION))\
-		key_handles.c\
-		move_handles.c\
+		$(addprefix movement/, $(MOVEMENT))\
 		loop_game.c\
-		test.c\
 
 LIBFT = ./libs/libft/
 

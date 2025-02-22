@@ -26,7 +26,8 @@ void	validate_tex(t_cub *cub, char *cp)
 		error(NULL, "Error: misconfiguration in textures\n", 0);
 	}
 	path = ft_substr(line, 3, ft_strlen(line) - 4);
-	if (validate_extension_xpm(path) || ((fd_v = open(path, O_RDONLY)) == -1))
+	fd_v = open(path, O_RDONLY);
+	if (validate_extension_xpm(path) || fd_v == -1)
 	{
 		close(fd_v);
 		free(path);
@@ -67,18 +68,19 @@ void	validate_rgb(t_cub *cub, char *fc)
 		exit(1);
 }
 
-void    validate_cub(t_cub *cub, char *file)
+void	validate_cub(t_cub *cub, char *file)
 {
 	char	*l;
 
-	if ((cub->fd_cub = open(file, O_RDONLY)) == -1)
+	cub->fd_cub = open(file, O_RDONLY);
+	if (cub->fd_cub == -1)
 	{
 		ft_fprintf(2, "Error: cannot open this file\n");
 		close(cub->fd_cub);
 		exit(1);
 	}
-    validate_extension_cub(file);
-    validate_tex(cub, "NO");
+	validate_extension_cub(file);
+	validate_tex(cub, "NO");
 	validate_tex(cub, "SO");
 	validate_tex(cub, "WE");
 	validate_tex(cub, "EA");
