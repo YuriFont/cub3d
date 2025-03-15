@@ -175,5 +175,9 @@ int			rotate_left(t_cub *cub);
 int			get_mouse_pos(void *ptr);
 int			animation_wall(t_cub *cub);
 int			run_code(t_cub *cub);
+void		load_image_texture(t_cub *cub, t_img *texture, char *path);
+int			load_texture(t_cub *cub);
+void		loading_game(t_cub *cub, char *av);
+int			initial_config(t_cub *cub, char *av);
 
 #endif

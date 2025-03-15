@@ -7,7 +7,9 @@ VALIDATION = validate_map.c\
 				validate_utils.c
 
 FILL_STRUCT = fill_struct.c\
-				fill_struct_utils.c
+				fill_struct_utils.c\
+				load_game.c\
+				load_texture.c
 
 UTILS = utils.c
 
