@@ -14,7 +14,7 @@
 
 static int	leak(char c)
 {
-	if (c != ' ' && c != '1')
+	if (c != ' ' && c != '1' && c != '\n')
 		return (1);
 	return (0);
 }

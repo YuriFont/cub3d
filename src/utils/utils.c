@@ -60,3 +60,32 @@ int	error(t_cub *cub, char *msg, int flag)
 	ft_fprintf(2, "%s", msg);
 	exit(1);
 }
+
+void valid_nl(char *holder_map)
+{
+	int	i;
+
+	i = 0;
+	while (holder_map[i] == '\n' || holder_map[i] == ' '
+		|| holder_map[i] == '\t')
+		i++;
+	while (holder_map[i])
+	{
+		if (holder_map[i] == '\n' && holder_map[i + 1] == '\n')
+		{
+			while (holder_map[i] == '\n')
+			{
+				if (holder_map[i + 1] != '\n' && holder_map[i + 1] != ' '
+					&& holder_map[i + 1] != '\t' && holder_map[i + 1] != '\0')
+				{
+					free(holder_map);
+					error(NULL, "Error: invalid map\n", 0);
+				}
+				i++;
+				if (holder_map[i] == '\0')
+					return ;
+			}
+		}
+		i++;
+	}
+}

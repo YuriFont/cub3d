@@ -16,7 +16,7 @@ void	calculate_dir(t_cub *cub, t_ray_info *infos, int x)
 {
 	double	camera_x;
 
-	camera_x = 2 * x / (double)WIDTH - 1;
+	camera_x = 2 * (x / (double)WIDTH) - 1;
 	infos->ray_dir_x = cub->i_p.dir[0] + cub->i_p.plane[0] * camera_x;
 	infos->ray_dir_y = cub->i_p.dir[1] + cub->i_p.plane[1] * camera_x;
 }

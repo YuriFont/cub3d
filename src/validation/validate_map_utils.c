@@ -35,11 +35,12 @@ void	validate_spaces(t_cub *cub)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == ' '
+			if ((ft_strlen(map[i]) == 1 && map[i][0] != '\n')
+				&& map[i][j] == ' '
 				&& check_around(map, i, j, cub->i_map.height))
 			{
 				free_matriz(cub->i_map.map);
-				error(NULL, "Error: the map is not surrounded by walls\n", 0);
+				error(NULL, "Error: the map is not surrounded by walls 4\n", 0);
 			}
 			j++;
 		}
@@ -47,14 +48,11 @@ void	validate_spaces(t_cub *cub)
 	}
 }
 
-void	validate_unevenness_top(t_cub *cub)
+void	validate_unevenness_top(t_cub *cub, int i, int j)
 {
-	int		i;
-	int		j;
 	int		line;
 	char	**map;
 
-	i = 0;
 	map = cub->i_map.map;
 	while (i < cub->i_map.height)
 	{
@@ -62,12 +60,13 @@ void	validate_unevenness_top(t_cub *cub)
 		{
 			j = ft_strlen(map[i]) - 1;
 			line = ft_strlen(map[i + 1]) - 1;
-			while (j >= line)
+			while (j > line)
 			{
-				if (map[i][j] != '1')
+				if ((ft_strlen(map[i]) == 1 && map[i][0] != '\n')
+					|| map[i][j] != '1')
 				{
 					free_matriz(cub->i_map.map);
-					error(NULL, "Error: map is not surrounded by walls\n", 0);
+					error(NULL, "Error: map is not surrounded by walls 5\n", 0);
 				}
 				j--;
 			}
@@ -96,7 +95,7 @@ void	validate_unevenness_bot(t_cub *cub)
 				if (map[i][j] != '1')
 				{
 					free_matriz(cub->i_map.map);
-					error(NULL, "Error: map is not surrounded by walls\n", 0);
+					error(NULL, "Error: map is not surrounded by walls 6\n", 0);
 				}
 				j--;
 			}

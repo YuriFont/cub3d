@@ -138,7 +138,7 @@ void		validate_map(t_cub *cub);
 void		check_character(t_cub *cub, char c);
 void		validate_spaces(t_cub *cub);
 void		validate_unevenness_bot(t_cub *cub);
-void		validate_unevenness_top(t_cub *cub);
+void		validate_unevenness_top(t_cub *cub, int i, int j);
 int			check_around(char **map, int y, int x, int h);
 void		fill_struct(t_cub *cub, char *file);
 void		fill_map(t_cub *cub);
@@ -179,5 +179,6 @@ void		load_image_texture(t_cub *cub, t_img *texture, char *path);
 int			load_texture(t_cub *cub);
 void		loading_game(t_cub *cub, char *av);
 int			initial_config(t_cub *cub, char *av);
+void		valid_nl(char *holder_map);
 
 #endif
