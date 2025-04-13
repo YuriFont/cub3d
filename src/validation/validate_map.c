@@ -55,8 +55,10 @@ static void	validate_sides(t_cub *cub)
 		while (map[i][j] && (map[i][j] == ' ' || map[i][j] == '\t'))
 			j++;
 		k = ft_strlen(map[i]) - 1;
-		if ((ft_strlen(map[i]) == 1 && map[i][0] != '\n')
-			&& (map[i][j] != '1' || map[i][k] != '1'))
+		if (i > cub->i_map.height)
+			break ;
+		if ((ft_strlen(map[i]) == 1 && map[i][0] != ' ')
+			|| (map[i][j] != '1' || map[i][k] != '1'))
 		{
 			free_matriz(cub->i_map.map);
 			error(NULL, "Error: the map is not surrounded by walls 1\n", 0);
