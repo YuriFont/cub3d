@@ -60,3 +60,21 @@ int	validate_hx(char *num)
 	}
 	return (0);
 }
+
+void	find_height(t_cub *cub, int i)
+{
+	int	j;
+	char	**map;
+
+	map = cub->i_map.map;
+	i--;
+	j = 0;
+	while (i > 0 && map[i])
+	{
+		j = ft_strlen(map[i]) - 1;
+		if (map[i][j] == '1')
+			break ;
+		i--;
+	}
+	cub->i_map.height = i;
+}

@@ -111,18 +111,6 @@ static void	validate_bottom(t_cub *cub)
 	}
 }
 
-void delete_space(char *map)
-{
-	int len;
-
-	len = ft_strlen(map) - 1;
-	while (len > 0 && (map[len] == ' ' || map[len] == '\t'))
-		len--;
-	map[len + 1] = '\0';
-	if (len == 0)
-		map[len] = '\0';
-}
-
 void	validate_map(t_cub *cub)
 {
 	int	i;
@@ -138,10 +126,7 @@ void	validate_map(t_cub *cub)
 			cub->i_map.width = ft_strlen(cub->i_map.map[i]);
 		i++;
 	}
-	for (int i = 0; cub->i_map.map[i];i++) {
-		printf("%s\n", cub->i_map.map[i]);
-	}
-	cub->i_map.height = i - 1;
+	find_height(cub, i);
 	validate_chars(cub);
 	validate_sides(cub);
 	validate_spaces(cub);

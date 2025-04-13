@@ -180,5 +180,7 @@ int			load_texture(t_cub *cub);
 void		loading_game(t_cub *cub, char *av);
 int			initial_config(t_cub *cub, char *av);
 void		valid_nl(char *holder_map);
+void		delete_space(char *line);
+void		find_height(t_cub *cub, int i);
 
 #endif

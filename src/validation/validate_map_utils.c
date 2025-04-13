@@ -33,12 +33,12 @@ void	validate_spaces(t_cub *cub)
 	while (map[i])
 	{
 		j = 0;
+		printf("%s\n", map[i]);
 		while (map[i][j])
 		{
-			if ((ft_strlen(map[i]) == 1 && map[i][0] != '\n')
-				&& map[i][j] == ' '
-				&& check_around(map, i, j, cub->i_map.height))
+			if (map[i][j] == ' ' && check_around(map, i, j, cub->i_map.height))
 			{
+				printf("%c\n", map[i][j]);
 				free_matriz(cub->i_map.map);
 				error(NULL, "Error: the map is not surrounded by walls 4\n", 0);
 			}
@@ -102,4 +102,18 @@ void	validate_unevenness_bot(t_cub *cub)
 		}
 		i--;
 	}
+}
+
+void	delete_space(char *line)
+{
+    int len;
+
+    if (!line)
+        return;
+    len = ft_strlen(line) - 1;
+    while (len >= 0 && line[len] == ' ')
+    {
+        line[len] = '\0';
+        len--;
+    }
 }
