@@ -61,7 +61,7 @@ int	error(t_cub *cub, char *msg, int flag)
 	exit(1);
 }
 
-void valid_nl(char *holder_map)
+void	valid_nl(char *holder_map)
 {
 	int	i;
 

@@ -104,14 +104,14 @@ void	validate_unevenness_bot(t_cub *cub)
 
 void	delete_space(char *line)
 {
-    int len;
+	int	len;
 
-    if (!line)
-        return;
-    len = ft_strlen(line) - 1;
-    while (len >= 0 && line[len] == ' ')
-    {
-        line[len] = '\0';
-        len--;
-    }
+	if (!line)
+		return ;
+	len = ft_strlen(line) - 1;
+	while (len >= 0 && line[len] == ' ')
+	{
+		line[len] = '\0';
+		len--;
+	}
 }

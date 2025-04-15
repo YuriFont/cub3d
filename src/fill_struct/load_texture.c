@@ -6,7 +6,7 @@
 /*   By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:18 by erramos           #+#    #+#             */
-/*   Updated: 2025/04/14 22:41:30 by yufonten         ###   ########.fr       */
+/*   Updated: 2025/04/14 22:58:26 by yufonten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	load_image_texture(t_cub *cub, t_img *texture, char *path)
 {
-	char *line;
-
 	texture->img_ptr = mlx_xpm_file_to_image(cub->ptr_mlx, path,
 			&texture->width, &texture->height);
 	if (!texture->img_ptr)

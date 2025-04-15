@@ -74,7 +74,7 @@ int	validate_hx(char *num)
 
 void	find_height(t_cub *cub, int i)
 {
-	int	j;
+	int		j;
 	char	**map;
 
 	map = cub->i_map.map;
