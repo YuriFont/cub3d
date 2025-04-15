@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erramos <erramos@student.42.rio>           +#+  +:+       +#+        */
+/*   By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:18 by erramos           #+#    #+#             */
-/*   Updated: 2025/03/15 15:41:20 by erramos          ###   ########.fr       */
+/*   Updated: 2025/04/14 22:06:46 by yufonten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	load_image_texture(t_cub *cub, t_img *texture, char *path)
 {
+	char *line;
+
 	texture->img_ptr = mlx_xpm_file_to_image(cub->ptr_mlx, path,
 			&texture->width, &texture->height);
-	if (!texture->img_ptr)
+	cub->fd_cub = open(path, O_RDONLY);
+	line = get_next_line(cub->fd_cub);
+	if (!texture->img_ptr || !line)
 		error(cub, "Error: cannot load texture image\n", 1);
 	texture->img_data = (unsigned char *)mlx_get_data_addr(texture->img_ptr,
 			&texture->bpp, &texture->line_len, &texture->endian);
+	close(cub->fd_cub);
+	free(line);
 }
 
 int	load_texture(t_cub *cub)

@@ -71,9 +71,12 @@ void	find_height(t_cub *cub, int i)
 	j = 0;
 	while (i > 0 && map[i])
 	{
-		j = ft_strlen(map[i]) - 1;
-		if (map[i][j] == '1')
-			break ;
+		if (ft_strlen(map[i]) > 0)
+		{
+			j = ft_strlen(map[i]) - 1;
+			if (map[i][j] == '1')
+				break ;
+		}
 		i--;
 	}
 	cub->i_map.height = i;

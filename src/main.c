@@ -19,11 +19,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		error(NULL, "Error: cub3D only accepts one parameter\n", 0);
 	loading_game(&cub, av[1]);
-	
-	// for (int i = 0; cub.i_map.map[i];i++) {
-	// 	printf("%s\n", cub.i_map.map[i]);
-	// }
-
 	mlx_hook(cub.w_mlx, KeyPress, KeyPressMask, &on_keypress, &cub);
 	mlx_hook(cub.w_mlx, KeyRelease, KeyReleaseMask, &on_keyrelease, &cub);
 	mlx_loop_hook(cub.ptr_mlx, run_code, &cub);
