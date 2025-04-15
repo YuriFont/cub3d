@@ -51,7 +51,18 @@ int	size_rgb(char **n)
 int	validate_hx(char *num)
 {
 	int	n;
+	int	i;
 
+	i = 0;
+	while (num[i])
+	{
+		if (!ft_isdigit(num[i]))
+		{
+			ft_fprintf(2, "Error: misconfiguration in rgb numbers\n");
+			return (1);
+		}
+		i++;
+	}
 	n = ft_atoi(num);
 	if (n > 255 || n < 0)
 	{
