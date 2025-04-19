@@ -4,7 +4,8 @@ VALIDATION = validate_map.c\
 				validate_map_utils.c\
 				check_around.c\
 				validate_cub.c\
-				validate_utils.c
+				validate_utils.c\
+				validate_cub_utils.c 
 
 FILL_STRUCT = fill_struct.c\
 				fill_struct_utils.c\

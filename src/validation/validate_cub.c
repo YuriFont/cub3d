@@ -12,66 +12,109 @@
 
 #include "../../inc/cub3d.h"
 
-void	validate_tex(t_cub *cub, char *cp)
+int	size_mat(char **config)
 {
-	char	*line;
-	char	*path;
-	int		fd_v;
+	int	i;
 
-	line = get_next_line(cub->fd_cub);
-	if (!line || ft_strlen(line) < 7 || ft_strncmp(line, cp, 2))
-	{
-		free(line);
-		close(cub->fd_cub);
-		error(NULL, "Error: misconfiguration in textures\n", 0);
-	}
-	path = ft_substr(line, 3, ft_strlen(line) - 4);
+	i = 0;
+	while (config[i])
+		i++;
+	if (i != 2)
+		return (1);
+	return (0);
+}
+
+int	validate_tex(t_cub *cub, char fw, char *line)
+{
+	int		fd_v;
+	char	**config;
+	char	*path;
+
+	config = ft_split(line, ' ');
+	path = ft_substr(config[1], 0, ft_strlen(config[1]) - 1);
 	fd_v = open(path, O_RDONLY);
-	if (validate_extension_xpm(path) || fd_v == -1)
+	if (fd_v == -1 || size_mat(config)|| validate_extension_xpm(path))
 	{
 		close(fd_v);
+		free_matriz(config);
 		free(path);
 		free(line);
 		close(cub->fd_cub);
 		error(NULL, "Error: misconfiguration in textures\n", 0);
 	}
+	fill_textures(cub, fw, path);
 	close(fd_v);
-	free(path);
-	free(line);
+	free_matriz(config);
+	return (1);
 }
 
-void	validate_rgb(t_cub *cub, char *fc)
+int	validate_rgb(t_cub *cub, char fc, char *line)
 {
-	char	*line;
-	char	*temp;
+	char	**config;
 	char	**n;
 	int		e;
-	int		i;
 
-	line = get_next_line(cub->fd_cub);
-	if (!line || ft_strlen(line) < 7 || ft_strncmp(line, fc, 2))
+	config = ft_split(line, ' ');
+	if (size_mat(config))
 	{
+		free_matriz(config);
 		free(line);
 		close(cub->fd_cub);
 		error(NULL, "Error: misconfiguration in floor or ceiling\n", 0);
 	}
-	temp = ft_substr(line, 2, ft_strlen(line) - 3);
-	n = ft_split(temp, ',');
-	e = -1;
+	ft_strlcpy(config[1], config[1], ft_strlen(config[1]) - 1);
+	n = ft_split(config[1], ',');
 	if (size_rgb(n) || validate_hx(n[0]) || validate_hx(n[1])
 		|| validate_hx(n[2]))
-		e = close(cub->fd_cub);
-	free(temp);
-	free(line);
-	free_matriz(n);
-	if (e == 0)
+	{
+		free_matriz(config);
+		free_matriz(n);
+		free(line);
+		close(cub->fd_cub);
 		exit(1);
+	}
+	fill_colors(cub, fc, n, config);
+	return (1);
+}
+
+int	loop_validate(t_cub *cub, char *line, int *validates)
+{
+	line = get_next_line(cub->fd_cub);
+	while (line)
+	{
+		if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
+			validates[0] = validate_tex(cub, 'N', line);
+		else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
+			validates[1] = validate_tex(cub, 'S', line);
+		else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
+			validates[2] = validate_tex(cub, 'W', line);
+		else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
+			validates[3] = validate_tex(cub, 'E', line);
+		else if (line[0] == 'F' && line[1] == ' ')
+			validates[4] = validate_rgb(cub, 'F', line);
+		else if (line[0] == 'C' && line[1] == ' ')
+			validates[5] = validate_rgb(cub, 'C', line);
+		else if (line_with_error(line))
+			return (1);
+		free(line);
+		if (finish_validate(validates))
+			return (0);
+		line = get_next_line(cub->fd_cub);
+	}
+	close(cub->fd_cub);
+	error(NULL, "Error: misconfiguration\n", 0);
+	return (1);
 }
 
 void	validate_cub(t_cub *cub, char *file)
 {
-	char	*l;
+	int		validates[6];
+	int		i;
+	char	*line;
 
+	i = 0;
+	while (i < 6)
+		validates[i++] = 0;
 	cub->fd_cub = open(file, O_RDONLY);
 	if (cub->fd_cub == -1)
 	{
@@ -80,12 +123,10 @@ void	validate_cub(t_cub *cub, char *file)
 		exit(1);
 	}
 	validate_extension_cub(file);
-	validate_tex(cub, "NO");
-	validate_tex(cub, "SO");
-	validate_tex(cub, "WE");
-	validate_tex(cub, "EA");
-	l = get_next_line(cub->fd_cub);
-	free(l);
-	validate_rgb(cub, "F ");
-	validate_rgb(cub, "C ");
+	if (loop_validate(cub, line, validates))
+	{
+		free(line);
+		close(cub->fd_cub);
+		error(NULL, "Error: misconfiguration\n", 0);
+	}
 }

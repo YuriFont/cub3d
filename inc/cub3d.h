@@ -182,5 +182,9 @@ int			initial_config(t_cub *cub, char *av);
 void		valid_nl(char *holder_map);
 void		delete_space(char *line);
 void		find_height(t_cub *cub, int i);
+void		fill_textures(t_cub *cub, char tex, char *line);
+void		fill_colors(t_cub *cub, char fc, char **n, char **config);
+int			finish_validate(int *validates);
+int			line_with_error(char *line);
 
 #endif

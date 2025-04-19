@@ -12,51 +12,34 @@
 
 #include "../../inc/cub3d.h"
 
-static void	fill_textures(t_cub *cub)
+void	fill_textures(t_cub *cub, char tex, char *line)
 {
-	char	*line[4];
-	int		i;
-
-	i = 0;
-	while (i < 4)
-		line[i++] = get_next_line(cub->fd_cub);
-	cub->i_tex.no = ft_substr(line[0], 3, ft_strlen(line[0]) - 4);
-	cub->i_tex.so = ft_substr(line[1], 3, ft_strlen(line[1]) - 4);
-	cub->i_tex.we = ft_substr(line[2], 3, ft_strlen(line[2]) - 4);
-	cub->i_tex.ea = ft_substr(line[3], 3, ft_strlen(line[3]) - 4);
-	free(line[0]);
-	free(line[1]);
-	free(line[2]);
-	free(line[3]);
+	if (tex == 'N')
+		cub->i_tex.no = line;
+	if (tex == 'S')
+		cub->i_tex.so = line;
+	if (tex == 'W')
+		cub->i_tex.we = line;
+	if (tex == 'E')
+		cub->i_tex.ea = line;
 }
 
-static void	fill_colors(t_cub *cub)
+void	fill_colors(t_cub *cub, char fc, char **n, char **config)
 {
-	char	*line[3];
-	char	**c[2];
-	char	*linec[2];
-	int		i;
-
-	i = 0;
-	while (i < 3)
-		line[i++] = get_next_line(cub->fd_cub);
-	linec[0] = ft_substr(line[1], 2, ft_strlen(line[1]) - 3);
-	linec[1] = ft_substr(line[2], 2, ft_strlen(line[2]) - 3);
-	c[0] = ft_split(linec[0], ',');
-	c[1] = ft_split(linec[1], ',');
-	i = -1;
-	while (++i < 3)
+	if (fc == 'F')
 	{
-		cub->i_tex.cf[i] = ft_atoi(c[0][i]);
-		cub->i_tex.cc[i] = ft_atoi(c[1][i]);
-		free(c[0][i]);
-		free(c[1][i]);
-		free(line[i]);
+		cub->i_tex.cf[0] = ft_atoi(n[0]);
+		cub->i_tex.cf[1] = ft_atoi(n[1]);
+		cub->i_tex.cf[2] = ft_atoi(n[2]);
 	}
-	free(linec[0]);
-	free(linec[1]);
-	free(c[0]);
-	free(c[1]);
+	if (fc == 'C')
+	{
+		cub->i_tex.cc[0] = ft_atoi(n[0]);
+		cub->i_tex.cc[1] = ft_atoi(n[1]);
+		cub->i_tex.cc[2] = ft_atoi(n[2]);
+	}
+	free_matriz(config);
+	free_matriz(n);
 }
 
 void	fill_map(t_cub *cub)
@@ -98,8 +81,6 @@ void	fill_struct(t_cub *cub, char *file)
 	char	*line;
 
 	cub->fd_cub = open(file, O_RDONLY);
-	fill_textures(cub);
-	fill_colors(cub);
 	fill_player_info(cub);
 	line = get_next_line(cub->fd_cub);
 	cub->i_img.img_ptr = NULL;

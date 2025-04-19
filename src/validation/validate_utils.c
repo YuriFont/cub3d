@@ -42,7 +42,7 @@ int	size_rgb(char **n)
 		i++;
 	if (i != 3)
 	{
-		ft_fprintf(2, "Error: misconfiguration in rgb numbers\n");
+		ft_fprintf(2, "Error: misconfiguration in rgb numbers 1\n");
 		return (1);
 	}
 	return (0);
@@ -58,7 +58,7 @@ int	validate_hx(char *num)
 	{
 		if (!ft_isdigit(num[i]))
 		{
-			ft_fprintf(2, "Error: misconfiguration in rgb numbers\n");
+			ft_fprintf(2, "Error: misconfiguration in rgb numbers 2\n");
 			return (1);
 		}
 		i++;
@@ -66,7 +66,7 @@ int	validate_hx(char *num)
 	n = ft_atoi(num);
 	if (n > 255 || n < 0)
 	{
-		ft_fprintf(2, "Error: misconfiguration in rgb numbers\n");
+		ft_fprintf(2, "Error: misconfiguration in rgb numbers 3\n");
 		return (1);
 	}
 	return (0);
