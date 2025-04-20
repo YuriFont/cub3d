@@ -42,7 +42,7 @@ int	size_rgb(char **n)
 		i++;
 	if (i != 3)
 	{
-		ft_fprintf(2, "Error: misconfiguration in rgb numbers\n");
+		ft_fprintf(2, "Error: misconfiguration in rgb numbers 1\n");
 		return (1);
 	}
 	return (0);
@@ -51,12 +51,44 @@ int	size_rgb(char **n)
 int	validate_hx(char *num)
 {
 	int	n;
+	int	i;
 
+	i = 0;
+	while (num[i])
+	{
+		if (!ft_isdigit(num[i]) && num[i] != '\n')
+		{
+			ft_fprintf(2, "Error: misconfiguration in rgb numbers 2\n");
+			return (1);
+		}
+		i++;
+	}
 	n = ft_atoi(num);
 	if (n > 255 || n < 0)
 	{
-		ft_fprintf(2, "Error: misconfiguration in rgb numbers\n");
+		ft_fprintf(2, "Error: misconfiguration in rgb numbers 3\n");
 		return (1);
 	}
 	return (0);
+}
+
+void	find_height(t_cub *cub, int i)
+{
+	int		j;
+	char	**map;
+
+	map = cub->i_map.map;
+	i--;
+	j = 0;
+	while (i > 0 && map[i])
+	{
+		if (ft_strlen(map[i]) > 0)
+		{
+			j = ft_strlen(map[i]) - 1;
+			if (map[i][j] == '1')
+				break ;
+		}
+		i--;
+	}
+	cub->i_map.height = i;
 }

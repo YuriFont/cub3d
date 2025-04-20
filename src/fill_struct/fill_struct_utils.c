@@ -14,15 +14,25 @@
 
 void	fill_vector_plane(t_cub *cub, char d)
 {
-	if (d == 'N' || d == 'S')
+	if (d == 'S')
+	{
+		cub->i_p.plane[0] = -0.66;
+		cub->i_p.plane[1] = 0;
+	}
+	else if (d == 'N')
 	{
 		cub->i_p.plane[0] = 0.66;
 		cub->i_p.plane[1] = 0;
 	}
-	else
+	else if (d == 'E')
 	{
 		cub->i_p.plane[0] = 0;
 		cub->i_p.plane[1] = 0.66;
+	}
+	else
+	{
+		cub->i_p.plane[0] = 0;
+		cub->i_p.plane[1] = -0.66;
 	}
 }
 
@@ -31,12 +41,12 @@ void	fill_player_dir(t_cub *cub, char d)
 	if (d == 'N')
 	{
 		cub->i_p.dir[0] = 0;
-		cub->i_p.dir[1] = 1;
+		cub->i_p.dir[1] = -1;
 	}
 	else if (d == 'S')
 	{
 		cub->i_p.dir[0] = 0;
-		cub->i_p.dir[1] = -1;
+		cub->i_p.dir[1] = 1;
 	}
 	else if (d == 'E')
 	{
@@ -51,15 +61,15 @@ void	fill_player_dir(t_cub *cub, char d)
 	fill_vector_plane(cub, d);
 }
 
-void    fill_player_info(t_cub *cub)
+void	fill_player_info(t_cub *cub)
 {
-    int		i;
+	int		i;
 	int		j;
 	char	**map;
 
 	map = cub->i_map.map;
 	i = 0;
-    while (map[i])
+	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
@@ -67,10 +77,10 @@ void    fill_player_info(t_cub *cub)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				cub->i_p.pos_y = (double)i;
-				cub->i_p.pos_x = (double)j;
+				cub->i_p.pos_y = (double)i + 0.5;
+				cub->i_p.pos_x = (double)j + 0.5;
 				fill_player_dir(cub, map[i][j]);
-				printf("POSIÇÕES DO JOGADOR\npos_x: %lf, pos_y: %lf, dir - X: %lf Y: %lf\n", cub->i_p.pos_x, cub->i_p.pos_y, cub->i_p.dir[0], cub->i_p.dir[1]);
+				map[i][j] = '0';
 				return ;
 			}
 			j++;
