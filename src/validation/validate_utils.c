@@ -56,7 +56,7 @@ int	validate_hx(char *num)
 	i = 0;
 	while (num[i])
 	{
-		if (!ft_isdigit(num[i]))
+		if (!ft_isdigit(num[i]) && num[i] != '\n')
 		{
 			ft_fprintf(2, "Error: misconfiguration in rgb numbers 2\n");
 			return (1);

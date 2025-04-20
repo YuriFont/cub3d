@@ -1,10 +1,20 @@
-NO ./assets/german.xpm
-SO ./assets/tin.xpm
-WE ./assets/lula.xpm
-EA ./assets/leosantana.xpm
+EA                          ./assets/leosantana.xpm
+NO   ./assets/german.xpm
 
-F 37,168,44
+F              37,168,44
+SO               ./assets/tin.xpm
+WE ./assets/lula.xpm
+
+
 C 88,189,255
+
+
+
+
+
+
+
+
 
         1111111111111111111111111
         1000000000110000000000001

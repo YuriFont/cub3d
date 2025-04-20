@@ -62,7 +62,6 @@ int	validate_rgb(t_cub *cub, char fc, char *line)
 		close(cub->fd_cub);
 		error(NULL, "Error: misconfiguration in floor or ceiling\n", 0);
 	}
-	ft_strlcpy(config[1], config[1], ft_strlen(config[1]) - 1);
 	n = ft_split(config[1], ',');
 	if (size_rgb(n) || validate_hx(n[0]) || validate_hx(n[1])
 		|| validate_hx(n[2]))
@@ -94,8 +93,6 @@ int	loop_validate(t_cub *cub, char *line, int *validates)
 			validates[4] = validate_rgb(cub, 'F', line);
 		else if (line[0] == 'C' && line[1] == ' ')
 			validates[5] = validate_rgb(cub, 'C', line);
-		else if (line_with_error(line))
-			return (1);
 		free(line);
 		if (finish_validate(validates))
 			return (0);
@@ -123,10 +120,5 @@ void	validate_cub(t_cub *cub, char *file)
 		exit(1);
 	}
 	validate_extension_cub(file);
-	if (loop_validate(cub, line, validates))
-	{
-		free(line);
-		close(cub->fd_cub);
-		error(NULL, "Error: misconfiguration\n", 0);
-	}
+	loop_validate(cub, line, validates);
 }

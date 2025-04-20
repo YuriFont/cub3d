@@ -22,6 +22,8 @@ void	fill_textures(t_cub *cub, char tex, char *line)
 		cub->i_tex.we = line;
 	if (tex == 'E')
 		cub->i_tex.ea = line;
+
+	printf("%c: %s\n", tex, line);
 }
 
 void	fill_colors(t_cub *cub, char fc, char **n, char **config)
@@ -31,12 +33,14 @@ void	fill_colors(t_cub *cub, char fc, char **n, char **config)
 		cub->i_tex.cf[0] = ft_atoi(n[0]);
 		cub->i_tex.cf[1] = ft_atoi(n[1]);
 		cub->i_tex.cf[2] = ft_atoi(n[2]);
+		printf("%c - R:%d G:%d B:%d\n", fc, cub->i_tex.cf[0], cub->i_tex.cf[1], cub->i_tex.cf[2]);
 	}
 	if (fc == 'C')
 	{
 		cub->i_tex.cc[0] = ft_atoi(n[0]);
 		cub->i_tex.cc[1] = ft_atoi(n[1]);
 		cub->i_tex.cc[2] = ft_atoi(n[2]);
+		printf("%c - R:%d G:%d B:%d\n", fc, cub->i_tex.cc[0], cub->i_tex.cc[1], cub->i_tex.cc[2]);
 	}
 	free_matriz(config);
 	free_matriz(n);
