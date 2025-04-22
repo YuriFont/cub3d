@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   validate_cub_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yufonten <yufonten@student.42.rio>         +#+  +:+       +#+        */
+/*   By: yufonten <yufonten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 18:26:57 by yufonten          #+#    #+#             */
-/*   Updated: 2025/04/19 18:27:01 by yufonten         ###   ########.fr       */
+/*   Updated: 2025/04/20 22:36:00 by yufonten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
+
+int	error_tex(t_cub *cub, char *msg, int *validate)
+{
+	close(cub->fd_cub);
+	if (validate[0])
+		free(cub->i_tex.no);
+	if (validate[1])
+		free(cub->i_tex.so);
+	if (validate[2])
+		free(cub->i_tex.we);
+	if (validate[3])
+		free(cub->i_tex.ea);
+	ft_fprintf(2, "%s", msg);
+	exit(1);
+}
 
 int	finish_validate(int *validates)
 {

@@ -186,5 +186,6 @@ void		fill_textures(t_cub *cub, char tex, char *line);
 void		fill_colors(t_cub *cub, char fc, char **n, char **config);
 int			finish_validate(int *validates);
 int			line_with_error(char *line);
+int			error_tex(t_cub *cub, char *msg, int *validate);
 
 #endif

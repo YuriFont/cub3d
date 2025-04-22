@@ -98,8 +98,7 @@ int	loop_validate(t_cub *cub, char *line, int *validates)
 			return (0);
 		line = get_next_line(cub->fd_cub);
 	}
-	close(cub->fd_cub);
-	error(NULL, "Error: misconfiguration\n", 0);
+	error_tex(cub, "Error: misconfiguration\n", validates);
 	return (1);
 }
 
