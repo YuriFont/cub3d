@@ -143,6 +143,6 @@ Implementar um raycaster exige fluência em **álgebra linear** (planos de câme
 
 ### Authors · Autores
 
-Built by **[@yufonten](https://github.com/yufonten)** & **erramos** at 42 Rio.
+Built by **[@yufonten](https://github.com/yufonten)** & **[@erramos](https://github.com/erickramosxp)** at 42 Rio.
 
 </div>
